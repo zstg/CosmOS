@@ -1,9 +1,8 @@
 {...}: {
   services = {
+    xserver.displayManager.lightdm.enable = lib.mkForce false;
     displayManager = {
-      sddm = {
-        enable = false;
-      };
+      sddm.enable = false;
       ly = {
         enable = true;
         settings = {
@@ -11,7 +10,7 @@
           animation = "matrix";
           bigclock = true;
           asterisk = "*";
-          clear_password = true; # erase paddword on failure
+          clear_password = true; # erase password on failure
           vi_mode = false;
           fg = 8;
           border_fg = 8;

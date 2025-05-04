@@ -34,7 +34,8 @@ jobs:
       - name: Build ISO
         run: |
           nix build .#${{ matrix.flavor }}
-          mv result/iso/*.iso ${{ matrix.flavor }}.iso
+          cp result/iso/*.iso ${{ matrix.flavor }}.iso  # mv doesn't work because the file is owned by the `nixbld` user
+          chmod +w ${{ matrix.flavor }}.iso  # Ensure writable for upload
           rm -rf result/
 
       - name: Create Release (if first flavor)
