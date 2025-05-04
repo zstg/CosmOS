@@ -4,7 +4,7 @@
   # Home manager only works on already existing users.
   # So we define users in a normal nixosModule (as opposed to a homeManagerModule).
   documentation.man.generateCaches = false;
-  isoImage.squashfsCompression = "zstd -19";
+  isoImage.squashfsCompression = "gzip -9";
   nixpkgs.hostPlatform = "x86_64-linux";
   users.mutableUsers = true;
   programs.fish.enable = true;
