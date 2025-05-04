@@ -1,10 +1,11 @@
-{ pkgs,config,...}: {
+{ pkgs,lib,...}: {
   # Include agenix configuration here because it seems to work
 
   # Home manager only works on already existing users.
   # So we define users in a normal nixosModule (as opposed to a homeManagerModule).
   nixpkgs.hostPlatform = "x86_64-linux";
   users.mutableUsers = true;
+  programs.fish.enable = true;
   users.users.stig = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -16,7 +17,6 @@
   imports = [
     # Do not import homeManagerModule as nixosModules.
     # ./disko.nix
-    ./plymouth.nix
     ./programs
     ./services
   ];

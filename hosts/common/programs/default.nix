@@ -1,14 +1,14 @@
 {...}: {
   imports = [
-    ./starship
-    ./shells
-    # ./shells/zsh/ # fish better
+    # ./starship
+    # ./shells
     # ./gnupg
-    ./term
+    # ./term
     # ./nix
     # ./git
     # ./ssh
     # ./lldb
     # ./gdb
+    # ./plymouth
   ];
 }

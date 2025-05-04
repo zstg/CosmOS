@@ -1,16 +1,18 @@
 {pkgs, lib, ...}: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest;
+    # supportedFilesystems = lib.mkForce [ "ext4" "vfat" "ntfs" "btrfs" ];
+    # supportedFilesystems.zfs = lib.mkForce false;
     kernelParams = [ "fsck.mode=skip" "quiet" "loglevel=3"];
-    kernelModules = [ "uinput" ];
+    # kernelModules = [ "uinput" ];
     initrd = {
-	checkJournalingFS = false;
-	/*
-	services.udev.rules.extraRules = ''
-		SUBSYSTEM=="input", GROUP="uinput"
-		KERNEL=="uinput", GROUP="uinput"
-	'';
-	*/
+	    checkJournalingFS = false;
+	    /*
+	    services.udev.rules.extraRules = ''
+  		  SUBSYSTEM=="input", GROUP="uinput"
+  		  KERNEL=="uinput", GROUP="uinput"
+	    '';
+	    */
     };
     tmp.cleanOnBoot = true;
     loader = {

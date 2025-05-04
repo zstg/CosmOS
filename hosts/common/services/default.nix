@@ -1,14 +1,14 @@
 {...}:
 {
   imports = [
-    ./audio
-    ./dbus
+    # ./audio
+    # ./dbus
     # ./logind
-    ./libinput
-    ./envfs
-    ./openssh
-    ./xdg
-    ./security
-    ./networking
+    # ./libinput
+    # ./envfs
+    # ./openssh
+    # ./xdg
+    # ./security
+    # ./networking
   ];
 }

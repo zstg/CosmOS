@@ -1,7 +1,7 @@
 {...}: {
   imports = [
-    ./displaymanager
-    ./desktopmanager
+    # ./displaymanager
+    # ./desktopmanager
   ];
   networking.hostName = "Krypton";
 }
