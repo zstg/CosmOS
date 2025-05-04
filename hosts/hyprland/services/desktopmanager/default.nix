@@ -1,10 +1,1 @@
-{...}: {
-  imports = [ ./kde-plasma.nix ]; 
-  services = {
-    desktopManager = {
-      plasma6 = {
-        enable = true;
-      };
-    };
-  };
-  }
+# nothing to see here

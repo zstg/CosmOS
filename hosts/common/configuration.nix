@@ -3,7 +3,8 @@
 
   # Home manager only works on already existing users.
   # So we define users in a normal nixosModule (as opposed to a homeManagerModule).
-  users.users.mutableUsers = true;
+  nixpkgs.hostPlatform = "x86_64-linux";
+  users.mutableUsers = true;
   users.users.stig = {
     shell = pkgs.fish;
     isNormalUser = true;
@@ -22,8 +23,8 @@
 
   environment.systemPackages = with pkgs; [
     git
-    starship # shit causes problems at times when installed at user-level
-    libsForQt5.qt5.qtgraphicaleffects # systemsettings may need this
+    starship
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 
   # This value determines the NixOS release from which the default

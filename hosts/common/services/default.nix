@@ -2,7 +2,6 @@
 {
   imports = [
     ./audio
-    ./displaymanager
     ./dbus
     # ./logind
     ./libinput

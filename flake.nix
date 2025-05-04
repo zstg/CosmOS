@@ -34,27 +34,21 @@
       {
         packages.${system} = {
           default = self.nixosConfigurations.hyprland.config.system.build.isoImage;
-          gnome = self.nixosConfigurations.hyprland.config.system.gnome.isoImage;
-          hyprland = self.nixosConfigurations.hyprland.config.system.hyprland.isoImage;
+          gnome = self.nixosConfigurations.gnome.config.system.build.isoImage;
+          hyprland = self.nixosConfigurations.hyprland.config.system.build.isoImage;
         };
         nixosConfigurations = {
-
-          Krypton = nixpkgs.lib.nixosSystem {
+          hyprland = nixpkgs.lib.nixosSystem {
 		        specialArgs = { inherit inputs; };
             modules = [
               ({ pkgs, ... }: {
-                nixpkgs.overlays = [ 
-            	    rust-overlay.overlays.default 
-                ];
                 environment.systemPackages = with pkgs; [
                   zen-browser.packages.${system}.default
                 ];
               })
-
+              ./hosts/common
               stylix.nixosModules.stylix
-              ./hosts/Krypton/configuration.nix
-
-              
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-base.nix"
               home-manager.nixosModules.home-manager {
                 home-manager = {
                   backupFileExtension = "/tmp/${toString self.lastModified}.bak";
@@ -66,54 +60,44 @@
                 };
               }
             ];
-          };
-
-          vm = nixpkgs.lib.nixosSystem {
-		    specialArgs = { inherit inputs; };
-            modules = [
-              ({... }: { environment.systemPackages = [ zen-browser.packages.${system}.default agenix.packages.${system}.default ]; })
-              agenix.nixosModules.default {
-                age.secrets = {
-                  git-credentials = {
-                    file = ./hosts/Krypton/secrets/git-credentials.age;
-                    mode = "777";
-                    owner = "stig";
-                    group = "wheel";
-                  };
-                  password = {
-                    file = ./hosts/Krypton/secrets/password.age;
-                    owner = "stig";
-                    group = "wheel";
-                  };
-                };
-              }
-              stylix.nixosModules.stylix
-              ./hosts/vm/configuration.nix
-			  "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-              
-              home-manager.nixosModules.home-manager {
-                home-manager = {
-                  backupFileExtension = "/tmp/${toString self.lastModified}.bak";
-                  useGlobalPkgs = true;
-                  useUserPackages = true;
-                  users.stig = {
-                    home.stateVersion = "25.05";
-                  };
-                };
-              }
-            ];
-          };
-          
+          };         
           homeConfigurations = {
-            krypton = home-manager.lib.homeManagerConfiguration {
+            hyprland = home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              modules = [ ./hosts/Krypton/home.nix stylix.homeManagerModules.stylix ];
+              modules = [ ./hosts/hyprland/home.nix stylix.homeManagerModules.stylix ];
               extraSpecialArgs = { inherit inputs; };
             };
+          };
 
-            vm = home-manager.lib.homeManagerConfiguration {
+
+
+          gnome = nixpkgs.lib.nixosSystem {
+		        specialArgs = { inherit inputs; };
+            modules = [
+              ({ pkgs, ... }: {
+                environment.systemPackages = with pkgs; [
+                  zen-browser.packages.${system}.default
+                ];
+              })
+              ./hosts/common
+              stylix.nixosModules.stylix
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
+              home-manager.nixosModules.home-manager {
+                home-manager = {
+                  backupFileExtension = "/tmp/${toString self.lastModified}.bak";
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.stig = {
+                    home.stateVersion = "25.05";
+                  };
+                };
+              }
+            ];
+          };         
+          homeConfigurations = {
+            gnome = home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.x86_64-linux;
-              modules = [ ./hosts/vm/home.nix stylix.homeManagerModules.stylix ];
+              modules = [ ./hosts/hyprland/home.nix stylix.homeManagerModules.stylix ];
               extraSpecialArgs = { inherit inputs; };
             };
           };

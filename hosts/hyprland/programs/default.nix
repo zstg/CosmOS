@@ -5,7 +5,12 @@
     ./nm-applet.nix
     ./dconf.nix
     ./light.nix
-    ./rice
+    ./mako
+    ./btop
+    ./cava
+    ./ranger
+    ./stylix.nix
+    ./zellij
   ];
   # systemd.user.startServices = "sd-switch";
 }
