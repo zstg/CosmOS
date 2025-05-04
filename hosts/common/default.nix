@@ -11,6 +11,6 @@
     ./locale.nix
     # ./dotfiles-path.nix
     ./systemd.nix
-    # ./stylix.nix
+    ./stylix.nix
   ];
 }

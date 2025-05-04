@@ -9,7 +9,6 @@
     ./btop
     ./cava
     ./ranger
-    ./stylix.nix
     ./zellij
   ];
   # systemd.user.startServices = "sd-switch";
