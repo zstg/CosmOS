@@ -39,9 +39,5 @@
       }))
     */
       ];
-    home.file.".zen/native-messaging-hosts/org.kde.plasma.browser_integration.json" = {
-     # enable = config.programs.librewolf.enable;
-     source = "${pkgs.kdePackages.plasma-browser-integration}/lib/mozilla/native-messaging-hosts/org.kde.plasma.browser_integration.json";
-     };
     };
 }

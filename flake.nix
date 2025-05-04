@@ -74,14 +74,15 @@
           gnome = nixpkgs.lib.nixosSystem {
 		        specialArgs = { inherit inputs; };
             modules = [
-              ({ pkgs, ... }: {
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
+              ({ pkgs,lib, ... }: {
+                # boot.supportedFilesystems.zfs = lib.mkForce false;
                 environment.systemPackages = with pkgs; [
                   zen-browser.packages.${system}.default
                 ];
               })
               ./hosts/common
               stylix.nixosModules.stylix
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-gnome.nix"
               home-manager.nixosModules.home-manager {
                 home-manager = {
                   backupFileExtension = "/tmp/${toString self.lastModified}.bak";

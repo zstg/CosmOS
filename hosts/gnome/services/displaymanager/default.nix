@@ -5,6 +5,9 @@
     displayManager.gdm = {
       enable = true;
       autoSuspend = false;  # Disable automatic suspend
+      autologin = {
+        user = lib.mkForce "stig";
+      };
     };
   }
 }

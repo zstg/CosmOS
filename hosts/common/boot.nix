@@ -2,7 +2,7 @@
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_latest; # don't set it here!
     # supportedFilesystems = lib.mkForce [ "ext4" "vfat" "ntfs" "btrfs" ];
-    # supportedFilesystems.zfs = lib.mkForce false;
+    supportedFilesystems.zfs = lib.mkForce false;
     kernelParams = [ "fsck.mode=skip" "quiet" "loglevel=3"];
     # kernelModules = [ "uinput" ];
     # initrd.checkJournalingFS = false; # DISABLE THIS WHILE BUILDING THE ISO
