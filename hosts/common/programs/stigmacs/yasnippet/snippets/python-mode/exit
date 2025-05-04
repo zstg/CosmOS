@@ -1,3 +1,0 @@
-# name: exit
-# --
-raise SystemExit

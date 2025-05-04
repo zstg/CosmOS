@@ -1,10 +1,6 @@
 { pkgs,lib,...}: {
-  # Include agenix configuration here because it seems to work
-
-  # Home manager only works on already existing users.
-  # So we define users in a normal nixosModule (as opposed to a homeManagerModule).
   documentation.man.generateCaches = false;
-  isoImage.squashfsCompression = "gzip -9";
+  isoImage.squashfsCompression = "zstd -Xcompression-level 22";
   nixpkgs.hostPlatform = "x86_64-linux";
   users.mutableUsers = true;
   programs.fish.enable = true;

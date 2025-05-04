@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: lcm-fun
-# contributor: Likhon
-# key: /lcm
-# --
-long long lcm (long long a,long long b) { return ((a*b)/__gcd(a,b)); }

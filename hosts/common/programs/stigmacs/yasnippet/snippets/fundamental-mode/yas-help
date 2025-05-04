@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: yas help
-# key: <?
-# type: command
-# --
-(yas-describe-tables)
-(insert "<")

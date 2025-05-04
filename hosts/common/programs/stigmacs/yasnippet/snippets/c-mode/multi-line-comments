@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: multi-line comments
-# contributor: Likhon
-# key: /*
-# --
-/*
-  ${1:write your comments here}
-*/
-$0
