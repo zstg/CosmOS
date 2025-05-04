@@ -1,0 +1,74 @@
+#+TITLE: The Bridges of Königsberg
+#+AUTHOR: Stig
+#+STARTUP: reveal
+#+REVEAL_TRANSITION: cube
+#+OPTIONS: toc:nil
+
+* Introduction
+  The *Bridges of Königsberg* is a famous problem in mathematics, solved by *Leonhard Euler* in 1736, which led to the development of *graph theory*. The problem involves walking through the city of Königsberg, crossing each of its 7 bridges exactly once and returning to the starting point.
+
+* Problem Restatement in Graph Terms
+  Represent the city layout as a graph:
+  - *Vertices*: Landmasses (4 vertices)
+  - *Edges*: Bridges (7 edges)
+
+  The question is: *Can we visit each bridge exactly once?*
+
+* Euler's Theorem (for connected graphs)
+
+#+ATTR_REVEAL: :frag (appear appear appear)
+- *Eulerian Circuit*: All vertices have even degree.  
+- *Eulerian Path*: Exactly two vertices have odd degree.
+- More than two odd-degree vertices: No Eulerian Path or Circuit.
+In Königsberg, all vertices have odd degrees, so there's no Eulerian Path or Circuit.
+
+* Graph Representation of Königsberg
+  - Vertices: A, B, C, D
+  - Edges: 
+    - 3 bridges between A and C
+    - 2 bridges between A and B
+    - 1 bridge between B and C
+    - 1 bridge between C and D
+
+  Vertex degrees: A=3, B=3, C=5, D=3 (all odd)
+
+  Based on Euler's theorem: *No Eulerian Path or Circuit*.
+
+* Graphical Representation
+  [[/home/stig/Documents/DAA/pic.png]]
+
+* Pseudocode
+  To check for Eulerian properties:
+
+  #+begin_src plaintext
+  function isEulerian(graph):
+      oddDegreeCount = 0
+      for each vertex in graph:
+          if degree(vertex) is odd:
+              oddDegreeCount += 1
+      if oddDegreeCount == 0:
+          return "Eulerian Circuit Exists"
+      elif oddDegreeCount == 2:
+          return "Eulerian Path Exists"
+      else:
+          return "No Eulerian Path or Circuit"
+  #+end_src
+
+* Algorithm Applied to Königsberg
+#+ATTR_REVEAL: :frag (fade-in fade-out shrink)
+  - Vertices: A (3), B (3), C (5), D (3)
+  - Odd degree count: 4
+  - Result: No Eulerian Path or Circuit.
+
+* Conclusion
+  Euler's solution to the *Bridges of Königsberg* problem laid the foundation for graph theory, which is fundamental in computer science, especially in areas like network routing, algorithms, and optimization problems.
+
+* Applications
+#+ATTR_REVEAL: :frag (fade-in fade-in fade-in)
+  - **Graph Theory**: Used in network routing, social network analysis, etc.
+  - **Eulerian Paths**: Applications in garbage collection, snow plowing, etc.
+  - **Algorithm Design**: Forms the basis of traversal algorithms (DFS, BFS).
+
+* Closing Thoughts
+  The problem is a key milestone in mathematics, influencing modern computational problem-solving and algorithm design.
+

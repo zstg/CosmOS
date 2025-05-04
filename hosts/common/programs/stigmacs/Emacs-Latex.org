@@ -1,0 +1,92 @@
+#+startup: latexpreview
+#+property: header-args:jupyter :session hello :async yes -> not required
+* Org heading
+
+This is an ordinary org file. The following LaTeX code can be previewed:
+
+\[
+e^{i\pi} = -1
+\]
+
+
+\[
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]
+
+
+#+BEGIN_SRC latex :results file link :file /tmp/foo.png
+\begin{document}
+
+\[
+e^{i\pi} = -1
+\]
+
+\[
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]
+
+\end{document}
+
+#+END_SRC
+
+#+RESULTS:
+[[file:/tmp/foo.png]]
+
+* Python stuff
+#+NAME: block1
+#+begin_src python :results silent :noweb yes
+import sympy
+def inline(s):
+    return "\[" + s + "\]\n"
+#+END_SRC
+
+#+NAME: block2
+#+BEGIN_SRC python :noweb yes :results replace raw
+<<block1>>
+x = sympy.symbols("x")
+functions = [
+    x*2,
+    # ln(x),
+    # csc(x),
+    # atan(x),
+    # exp(x**2)
+]
+display = lambda f: inline(sympy.latex(sympy.Integral(f, x)) + " = " + sympy.latex(sympy.integrate(f)) + " + c")
+print("\n".join(map(display, functions)))
+#+end_src
+
+
+
+#+BEGIN_SRC python :results raw replace :noweb yes
+<<block1>>
+eq = x**2
+res = inline(sympy.latex(sympy.Integral(eq,x)))
+print(res)
+#+END_SRC
+
+#+RESULTS:
+None
+
+* Jupyter
+[[file:~/.dotfiles/avatar.png]]
+
+#+BEGIN_SRC jupyter
+# %matplotlib inline # by default
+import matplotlib.pyplot as plt
+fig = plt.figure()
+ax = fig.add_subplot(111)
+ax.plot(range(10), range(10))
+#+END_SRC
+
+#+RESULTS:
+[[file:./.ob-jupyter/cbde6c81dd4a07b2ff2de1424bb6d83c61e5b0a4.png]]
+
+#+BEGIN_SRC jupyter
+from sympy import *
+init_printing()
+x = symbols('x')
+display(integrate(sin(x**2), (x, -oo, oo)))
+#+END_SRC
+
+#+RESULTS:
+[[file:./.ob-jupyter/9b284cbfd50767453c8335877c0d130d65d88fea.png]]

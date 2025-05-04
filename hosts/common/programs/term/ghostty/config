@@ -1,0 +1,37 @@
+# FONTS
+font-family = JetBrainsMono NF
+font-style = default
+font-style-bold = default
+font-style-italic = default
+font-style-bold-italic = default
+font-size = 14
+font-feature = calt
+font-feature = dlig
+font-feature = liga
+bold-is-bright = true
+
+# MISC
+# looks native on Plasma, but misses out on features!!
+gtk-titlebar = true
+gtk-adwaita = true
+adw-toolbar-style = raised-border
+gtk-wide-tabs = true
+# background-opacity = 0.999
+mouse-hide-while-typing = true
+theme = OneHalfDark
+cursor-style = block
+# shell-integration = fish
+# shell-integration-features = no-cursor, sudo, title
+# use M-<mouse-1> to move the mouse
+cursor-click-to-move = true
+# KEYBINDS
+keybind = ctrl+,=open_config
+keybind = ctrl+shift+r=reload_config
+
+# Clipboard
+clipboard-read = allow
+clipboard-write = allow
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = false
+clipboard-paste-bracketed-safe = false
+copy-on-select = false

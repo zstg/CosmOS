@@ -1,0 +1,4 @@
+xontrib load prompt_starship 
+xontrib load fish_completer bashisms abbrevs
+# history off
+rm -rf ~/.local/share/xonsh/history_json/**xontrib load sh

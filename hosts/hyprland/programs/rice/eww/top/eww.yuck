@@ -1,0 +1,156 @@
+(defpoll time :interval '1s' :initial `date '+{"hour":"%I":"minute":"%M","hour_alt":"%H","am_pm":"%p","second":"%S"}'` `date '+{"hour":"%I","minute":"%M","hour_alt":"%H","am_pm":"%p","second":"%S"}'`)
+
+(defpoll wifi_icon :interval '5s' :initial "󰪎" `scripts/wifi.sh icon`)
+(defpoll wifi_text :interval '5s' :initial "Disconnected" `scripts/wifi.sh text`)
+(defpoll time_wish :interval '30s' :initial "Waiting" `scripts/time.sh wish`)
+(defpoll time_icon :interval '30s' :initial "" `scripts/time.sh icon`)
+
+(defpoll bright_val :interval '2s' :initial "0" `brightnessctl i | grep Current | cut -d ':' -f2 | cut -d ' ' -f3 | sed 's/[()%]//g'`)
+(defpoll vol_val :interval '2s' :initial "0" `pactl -- get-sink-volume @DEFAULT_SINK@ | cut -d '/' -f2 | cut -d ' ' -f3 | sed 's/[%]//g'`)
+(defpoll bat_val :interval '2s' :initial "0" `scripts/battery.sh charge`)
+(defpoll bat_status :interval '2s' :initial "0" `scripts/battery.sh status`)
+(defpoll bat_rem :interval '2s' :initial "0" `acpi | grep 'Battery 0' | cut -d ',' -f3`)
+
+
+(defvar vol_reveal false)
+(defvar time_alt true)
+(defvar bright_reveal false)
+(defvar bat_reveal false)
+(deflisten window_reveal "scripts/window.sh reveal")
+
+(deflisten workspace-list "scripts/workspaces.sh")
+(deflisten window-list "scripts/window.sh literal")
+
+(defwindow bar
+  :monitor 0
+  :geometry (geometry :x "12px"
+                      :y "0px"
+                      :width "3%"
+                      :height "98%"
+                      :anchor "left center")
+  :stacking "bg"
+  :reserve (struts :distance "75px" :side "left")
+  :windowtype "desktop"
+  :hexpand false
+  :vexpand false
+  :wm-ignore false
+  :class "bar"
+(whole_bar))
+
+(defwidget whole_bar[]
+  (centerbox :orientation "v" :vexpand false :space-evenly false
+    (top)
+    (center)
+    (bottom)
+  )
+)
+(defwidget center[]
+  (box :vexpand true :valign "center" :class "center-box"
+    (eventbox :onclick "notify-send 'Dash small'"
+              :onrightclick "${EWW_CMD} update time_alt=${!time_alt}"
+      (box :orientation "v" :class "time" :space-evenly false
+        (box {time_alt ? time.hour:time.hour_alt})
+        (box {time.minute})
+        (box :style {time_alt ? "padding-top:10px":"padding-top:3px"} {time_alt ? time.am_pm:time.second})
+      )
+    )
+  )
+)
+
+(defwidget top[]
+  (box :space-evenly false :spacing 8 :orientation "v" :class "top-bar" :vexpand false
+    (eventbox :onclick "notify-send 'Dashboard'"
+      (image :path "assets/archlinux.svg" :image-height 40 :image-width 40)
+      ;(box :halign "start" :style "color:#f00;font-size:3.1rem;padding-left:10px" "󰣇")
+    )
+    (workspaces)
+    (revealer :reveal window_reveal :transition "slidedown" :duration "300ms"
+      ;(box :orientation "v" :class "window-reveal" :vexpand true :spacing 7
+      ;  (label :text "" :style "padding-right:5px")
+      ;  (label :text "" :style "padding-right:3px")
+      ;  (label :text "" :style "padding-right:3px;color:#6082B6")
+      ;)
+      (literal :content window-list)
+    )
+  )
+)
+
+(defwidget bottom []
+  (box :orientation "v" :vexpand true :valign "end" :space-evenly false :class "bottom"
+    (bottom-wid)
+    (box
+      :style "padding-right:3px;color:#ff0000"
+      :tooltip "Powermenu"
+      (eventbox
+        :onclick "notify-send 'Powermenu'"
+        :onrightclick "poweroff"
+    "⏻"))
+  )
+)
+
+(defwidget bottom-wid []
+  (box :orientation "v" :class "bottom-wid" :space-evenly false :vexpand false :spacing 7
+    (metric :label "" 
+            :color "#f44336"
+            :reveal_val_str "vol_reveal"
+            :reveal_val vol_reveal
+            :onchange_evn "pactl -- set-sink-volume @DEFAULT_SINK@ {}%"
+            :val vol_val
+            :class "vol"
+            )
+    (box 
+      :style "padding-right:7px;color:#3498DB" 
+      :tooltip wifi_text
+    wifi_icon)
+    (eventbox :orientation "v" :space-evenly false
+              :onhover "${EWW_CMD} update bat_reveal=true"
+              :onhoverlost "${EWW_CMD} update bat_reveal=false"
+      (box :orientation "v" :space-evenly false :spacing 0
+        (revealer :reveal bat_reveal :transition "slideup" :duration "300ms" :halign "center"
+          (progress :orientation "v"
+                    :flipped true
+                    :value bat_val
+                    :class {bat_status != 1 ? "progress-dis":"progress-char"}
+                    :tooltip "${bat_val} ${bat_rem}"
+          )
+        )
+        (box :style {bat_status != 1 ? "color:#DFFF00":"color:#0FFF50"} {bat_status != 1 ? "󰁹":"󰂄"})
+      )
+    )
+
+    (metric :label "󰛨" 
+            :color "#FFBF00"
+            :reveal_val bright_reveal
+            :reveal_val_str "bright_reveal"
+            :onchange_evn "brightnessctl set {}%"
+            :val bright_val
+            :class "light"
+            )
+  )
+)
+
+(defwidget metric [label color reveal_val_str reveal_val onchange_evn val class]
+  (eventbox :orientation "v" :space-evenly false
+            :onhover "${EWW_CMD} update ${reveal_val_str}=true"
+            :onhoverlost "${EWW_CMD} update ${reveal_val_str}=false"
+    (box :orientation "v" :space-evenly false :spacing 0
+      (revealer :reveal {reveal_val} :transition "slideup" :duration "300ms"
+        (scale :orientation "v"
+               :flipped true
+               :min 0 :max 101
+               :value val
+               :height 95
+               :active true
+               :onchange onchange_evn
+               :tooltip val
+               :class "metric-${class}"
+        )
+      )
+      (box :style "padding-right:5px;color:${color}" label)
+    )
+  )
+)
+
+(defwidget workspaces []
+  (literal :content workspace-list)
+)

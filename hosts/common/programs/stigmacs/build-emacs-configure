@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# https "~/emacs-28.tar.xz" "https://ftpmirror.gnu.org/emacs/emacs-28.2.tar.xz" # the tar.GZs also work
+# ex ~/emacs-28.2.tar.xz && cd emacs-28.2
+# ./configure --with-json --with-x-toolkit=lucid --with-native-compilation --with-png --with-mailutils --with-mailhost --with-x --with-pop --with-sound --without-xwidgets --with-wide-int --with-libsystemd --with-gnutls --with-zlib --with-jpeg --with-file-notification --with-gif
+# ./configure --with-x-toolkit=lucid --without-xwidgets --without-native-compilation --with-png --with-sound --with-libsystemd --with-json --with-dbus --with-file-notification=yes --with-wide-int --with-jpeg --with-pdumper=yes
+# NATIVE compilation causes bugs in the daemon- which need a rebuild of emacs every now and then -> plus this emacs config is really smooth
+
+# Wayland-native config ☟ for Hyprland
+if [ ! -d ~/Git/emacs-src ]; then
+  git clone --single-branch --depth=1 https://github.com/emacs-mirror/emacs.git ~/Git/emacs-src --branch=emacs-30
+fi
+cd ~/Git/emacs-src/
+echo "Building Emacs"
+./autogen.sh
+echo "Setting up build flags...\n\n"
+./configure --with-gnutls \
+	    --without-xwidgets \
+	    # --with-json \ # default since Emacs 30, no longer an option
+	    --with-tree-sitter \
+	    --with-png \
+	    --with-jpeg \
+	    --without-wide-int \
+	    --with-sound \
+	    --without-native-compilation \
+	    # --with-pgtk \
+	    # --without-x-toolkit \
+           --with-x-toolkit=lucid \
+	   # --without-x \
+	    --with-libsystemd \
+	    --with-dbus \
+	    # --with-file-notifications=yes \
+	    --with-pdumper=yes \
+            --without-pop \
+            --without-mailutils
+
+# lucid toolkit causes crashes on Wayland
+make && sudo make install

@@ -1,0 +1,3 @@
+# name: colnames
+# --
+colnames($1) = tolower(colnames($1))

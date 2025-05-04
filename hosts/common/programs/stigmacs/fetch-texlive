@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+mkdir -p ~/.Texlive && cd ~/TEXLIVE
+wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+~/.dotfiles/scripts/ex install-tl-unx.tar.gz
+./install-tl --texdir ~/.Texlive
+sudo ln -sf ~/.Texlive/bin/x86_64-linux/dvipng /usr/local/bin
+sudo ln -sf ~/.Texlive/bin/x86_64-linux/latex /usr/local/bin
+sudo ln -sf ~/.Texlive/bin/x86_64-linux/pdflatex /usr/local/bin

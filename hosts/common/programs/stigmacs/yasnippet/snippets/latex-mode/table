@@ -1,0 +1,14 @@
+# name: table
+# --
+\begin{table}[htbp]
+\centering
+\caption{}
+\label{tab:}
+\begin{tabular}{ll}
+\toprule
+$0
+\midrule
+
+\bottomrule
+\end{tabular}
+\end{table}

@@ -1,0 +1,78 @@
+#+STARTUP: latexpreview
+#+begin_src python :results graphics
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.figure(figsize=(3, 3))
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", data=tips)
+plt.savefig('boxplot.svg', dpi=36)
+#+end_src
+
+
+#+begin_src ipython :session :results file link
+import matplotlib
+import matplotlib.pyplot as plt
+fig=plt.figure(figsize=(3,2))
+plt.plot([1,3,2])
+fig.tight_layout()
+
+fname = 'images/myfig.pdf'
+plt.savefig(fname)
+fname # return this to org-mode
+#+end_src
+
+#+BEGIN_SRC python :results raw output
+from sympy import *
+x = symbols("x")
+def inline(s):
+    return "\[" + s + "\]\n"
+
+functions = [
+    x*2,
+    ln(x),
+    csc(x),
+    atan(x),
+    exp(x**2)
+]
+display = lambda f: inline(latex(Integral(f, x)) + " = " + latex(integrate(f)) + " + c")
+print("\n".join(map(display, functions)))
+#+END_SRC
+
+#+RESULTS:
+\[\int 2 x\, dx = x^{2} + c\]
+
+\[\int \log{\left(x \right)}\, dx = x \log{\left(x \right)} - x + c\]
+
+\[\int \csc{\left(x \right)}\, dx = \frac{\log{\left(\cos{\left(x \right)} - 1 \right)}}{2} - \frac{\log{\left(\cos{\left(x \right)} + 1 \right)}}{2} + c\]
+
+\[\int \operatorname{atan}{\left(x \right)}\, dx = x \operatorname{atan}{\left(x \right)} - \frac{\log{\left(x^{2} + 1 \right)}}{2} + c\]
+
+\[\int e^{x^{2}}\, dx = \frac{\sqrt{\pi} \operatorname{erfi}{\left(x \right)}}{2} + c\]
+
+
+This is _normal_ LaTeX output.
+\begin{equation}
+\left[ - i, \  i\right]
+\end{equation}
+
+
+#+begin_src python :results graphics file value :file boxplot.svg
+import matplotlib, numpy
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+fig=plt.figure(figsize=(4,2))
+x=numpy.linspace(-15,15)
+plt.plot(numpy.sin(x)/x)
+fig.tight_layout()
+plt.savefig('/tmp/python-matplot-fig.png')
+#+end_src
+
+#+begin_src ipython :results raw drawer
+%matplotlib inline
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.figure(figsize=(5, 5))
+tips = sns.load_dataset("tips")
+sns.boxplot(x="day", y="tip", data=tips)
+return plt.gcf()
+#+end_src

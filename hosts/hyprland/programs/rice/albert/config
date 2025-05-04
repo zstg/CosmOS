@@ -1,0 +1,45 @@
+[General]
+frontend=widgetsboxmodel
+showTray=false
+telemetry=false
+
+[applications]
+enabled=true
+use_exec=true
+use_generic_name=true
+use_keywords=true
+
+[calculator_qalculate]
+enabled=true
+
+[clipboard]
+enabled=true
+persistent=true
+
+[files]
+enabled=true
+paths=@Invalid()
+
+[mpris]
+enabled=true
+
+[system]
+command_lock=hyprlock
+command_logout=hyprctl dispatch exit
+command_poweroff=pkexec shutdown now
+command_reboot=pkexec systemctl reboot
+enabled=true
+
+[widgetsboxmodel]
+alwaysOnTop=true
+clearOnHide=true
+clientShadow=false
+displayScrollbar=false
+followCursor=true
+hideOnFocusLoss=true
+historySearch=true
+itemCount=10
+lightTheme=Nord
+quitOnClose=false
+showCentered=true
+systemShadow=false

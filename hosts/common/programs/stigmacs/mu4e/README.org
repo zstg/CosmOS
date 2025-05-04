@@ -1,0 +1,13 @@
+mu init --maildir=$HOME/.mu-mail --my-address='kantonato04@gmail.com'
+mu index
+mkdir -p $HOME.mu-mail/kantonato04@gmail.com $HOME/.mu-mail/archive-kantonato04@gmail.com
+mbsync -a
+https://www.reddit.com/r/emacs/comments/1e4ozoo/comment/lhrq87e/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
+Here's what ~~/.authinfo~ is used for:
+#+BEGIN_SRC
+machine "smtp.gmail.com" login "zestig@gmail.com" password "abcd defg efgh fghi"
+#+END_SRC
+
+
+~abcd defg efgh fghi~ is the _Application_ password that you set up, not the Google Account password.

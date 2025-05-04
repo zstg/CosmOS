@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Network;Email;
+Comment=GNU Emacs is an extensible, customizable text editor - and more
+Exec=/home/stig/.dotfiles/scripts/emc --create-frame --eval "(message-mailto (pop server-eval-args-left))" %U
+Icon=emacs
+Name=Emacs (Mail, Client)
+MimeType=x-scheme-handler/mailto;
+NoDisplay=false
+Terminal=false
+Type=Application
+Keywords=emacsclient;
+Actions=new-window;new-instance;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=/usr/local/bin/emacsclient --create-frame --eval "(message-mailto (pop server-eval-args-left))" %U
+
+[Desktop Action new-instance]
+Name=New Instance
+Exec=emacs -f message-mailto %u

@@ -1,0 +1,70 @@
+Expunge None
+Create Near
+SyncState *
+
+IMAPAccount kantonato04@gmail.com
+Host imap.gmail.com
+User kantonato04@gmail.com
+PassCmd "~/getcreds"
+TLSType IMAPS
+SSLVersions TLSv1.1 TLSv1.2
+
+IMAPStore kantonato04@gmail.com-remote
+Account kantonato04@gmail.com
+
+MaildirStore kantonato04@gmail.com-local
+Path ~/.mu-mail/kantonato04@gmail.com/
+Inbox ~/.mu-mail/kantonato04@gmail.com/Inbox
+SubFolders Verbatim
+
+MaildirStore kantonato04@gmail.com-archive
+Path ~/.mu-mail/archive-kantonato04@gmail.com/
+
+Channel kantonato04@gmail.com-archive
+Far ":kantonato04@gmail.com-remote:[Google Mail]/All Mail"
+Near ":kantonato04@gmail.com-archive:Archive"
+Sync All
+Create Both 
+Expunge Both
+SyncState *
+
+Channel kantonato04@gmail.com-trash
+Far ":kantonato04@gmail.com-remote:[Google Mail]/Bin"
+Near ":kantonato04@gmail.com-archive:Trash"
+Sync Pull
+Create Both 
+Expunge Both
+SyncState *
+
+Channel kantonato04@gmail.com-drafts
+Far ":kantonato04@gmail.com-remote:[Google Mail]/Drafts"
+Near ":kantonato04@gmail.com-local:Drafts"
+Sync Pull
+Create Both 
+Expunge Both
+SyncState *
+
+Channel kantonato04@gmail.com-sent
+Far ":kantonato04@gmail.com-remote:[Google Mail]/Sent Mail"
+Near ":kantonato04@gmail.com-local:Sent"
+Sync Pull
+Expunge Both
+Create Both 
+Expunge Both
+SyncState *
+
+Channel kantonato04@gmail.com-inbox
+Far ":kantonato04@gmail.com-remote:INBOX"
+Near ":kantonato04@gmail.com-local:Inbox"
+Sync All
+Expunge Both
+Create Both 
+Expunge Both
+SyncState *
+
+Group kantonato04@gmail.com
+Channel kantonato04@gmail.com-trash
+Channel kantonato04@gmail.com-inbox
+Channel kantonato04@gmail.com-drafts
+Channel kantonato04@gmail.com-sent
+Channel kantonato04@gmail.com-archive

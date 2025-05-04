@@ -1,0 +1,286 @@
+# vim:fileencoding=utf-8:foldmethod=marker
+###
+#{{{
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+#installation via script from github
+export ZSH="/home/$USER/.oh-my-zsh"
+#installation via paru -S oh-my-zsh-git
+export ZSH=/usr/share/oh-my-zsh/
+export ZSH_CUSTOM="$HOME/.oh-my-zsh"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# if you installed the package oh-my-zsh-powerline-theme-git then you type here "powerline" as zsh theme
+# ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# ZSH_THEME_RANDOM_IGNORED=(pygmalion tjkirch_mod)
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+  source $ZSH/oh-my-zsh.sh
+fi
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+
+####   ARCOLINUX SETTINGS   ####
+#export PAGER='most'
+
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+setopt GLOB_DOTS
+#share commands between terminal instances or not
+unsetopt SHARE_HISTORY
+#setopt SHARE_HISTORY
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+export HISTCONTROL=ignoreboth:erasedups
+
+# Make nano the default editor
+
+#export EDITOR='nano'
+#export VISUAL='nano'
+
+#PS1='[\u@\h \W]\$ '
+
+if [ -d "$HOME/.bin" ] ;
+  then PATH="$HOME/.bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
+
+#: }}}
+#create a file called .zshrc-personal and put all your personal aliases
+#in there. They will not be overwritten by skel.
+
+# [[ -f ~/.zshrc-personal ]] && . ~/.zshrc-personal
+
+# reporting tools - install when not installed
+#neofetch
+#screenfetch
+#alsi
+#paleofetch
+#fetch
+#hfetch
+#sfetch
+#ufetch
+#ufetch-arco
+#pfetch
+#sysinfo
+#sysinfo-retro
+#cpufetch
+#colorscript random
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+#}}}
+
+# Mikeh,Muse are good prompts
+# export HISTORY_FILE="/tmp/history.sqlite"
+# export PF_ASCII="arch" # archlinux logo instead of Arco 
+# export distro="Archlinux"
+# export BROWSER="brave" # sudo ln -s /usr/lib/brave-bin/brave /usr/bin/x-www-browser # brave-desktop
+source ~/.profile
+# export HISTFILE="$XDG_STATE_HOME"/zsh/history
+export HISTFILE="$HOME"/.cache/zsh_history
+echo >  $HISTFILE
+source <(starship init zsh --print-full-init)
+# path+=('$HOME/.config/emacs/bin') 
+# export PAGER="bat --color=always"
+export MANPAGER='nvim +Man!'
+eman() {
+    emt -e "(progn (man \"$1\") (switch-to-buffer \"*Man $1*\") (maximize-window) (define-key Man-mode-map \"q\" '(lambda () (interactive) (kill-buffer) (save-buffers-kill-terminal))) (delete-other-windows))"
+}
+source ../aliases 
+alias man=eman
+alias pacman="sudo pacman --color=auto"
+alias pacman-packages="pacman -Qi | sed '/^Depends On/,/^Required By/{ s/^Required By.*$//; H; d }; /^Name/!d; /^Name/{ n;x;}'| sed '/^$/s//==================================================================================/'"
+alias moar="moar -no-statusbar -colors 16M -no-linenumbers -style dracula $@"
+# alias distrobox="TERM=xterm-256color distrobox"
+alias term="export TERM=xterm-256color"
+# SuperTuxKart aliases
+supertuxkart_path() {
+  if [[ `which SuperTuxKart-1.4-x86_64.AppImage` ]]; then
+      echo "~/Applications/SuperTuxKart-1.4-x86_64.AppImage"
+  elif [[ `which supertuxkart` ]]; then
+      echo "/usr/bin/supertuxkart"
+  fi
+}
+
+alias stk="$(supertuxkart_path)"
+alias stkserver-command="$(supertuxkart_path) --server-config=~/.config/supertuxkart/config-0.10/server_config.xml"
+alias stkserver-wan="stkserver-command --server-password=BeastWAN --wan-server=Stig_WAN"
+alias stkserver-lan="stkserver-command --server-password=BeastLAN --lan-server=Stig_LAN"
+
+
+# alias zellij="bash <(curl -sL zellij.dev/launch)"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# alias '&'="&> /dev/null" -> REALLY BAD IDEA, JUST FOR example PURPOSES
+# batdiff() {
+    # git diff --name-only --relative --diff-filter=d | xargs bat --diff
+# }
+ranger_cd() {
+    temp_file="$(mktemp -t "ranger_cd.XXXXXXXXXX")"
+    BAT_THEME=OneHalfDark ranger --choosedir="$temp_file" -- "${@:-$PWD}"
+    if chosen_dir="$(cat -- "$temp_file")" && [ -n "$chosen_dir" ] && [ "$chosen_dir" != "$PWD" ]; then
+        cd -- "$chosen_dir"
+    fi
+    rm -f -- "$temp_file"
+}
+
+sprunge() {
+  if [[ $1 ]]; then
+    curl -F 'sprunge=<-' "http://sprunge.us" <"$1"
+  else
+    curl -F 'sprunge=<-' "http://sprunge.us"
+  fi
+}
+
+ix() {
+  local opts
+  local OPTIND
+  [ -f "$HOME/.netrc" ] && opts='-n'
+  while getopts ":hd:i:n:" x; do
+      case $x in
+          h) echo "ix [-d ID] [-i ID] [-n N] [opts]"; return;;
+          d) $echo curl $opts -X DELETE ix.io/$OPTARG; return;;
+          i) opts="$opts -X PUT"; local id="$OPTARG";;
+          n) opts="$opts -F read:1=$OPTARG";;
+      esac
+  done
+  shift $(($OPTIND - 1))
+  [ -t 0 ] && {
+      local filename="$1"
+      shift
+      [ "$filename" ] && {
+          curl $opts -F f:1=@"$filename" $* ix.io/$id
+          return
+      }
+      echo "^C to cancel, ^D to send."
+  }
+  curl $opts -F f:1='<-' $* ix.io/$id
+}
+
+set -o vi
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+# (cat ~/.cache/wal/sequences &)
+autoload -Uz compinit
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+# bindkey "^Xa" _expand_alias
+zstyle ':completion:*' completer _expand_alias _complete _ignored
+zstyle ':completion:*' regular true
+zle -N ranger_cd
+# This binds Ctrl-O to ranger_cd:
+bindkey '^o' ranger_cd
+alias lf=ranger_cd
+# alias ranger=ranger_cd
+function launch {
+    nohup $1 >/dev/null 2>/dev/null & disown; exit
+}
+alias swallow=launch
+alias sw=launch
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/stig/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/stig/.miniconda/etc/profile.d/conda.sh" ]; then
+        . "/home/stig/.miniconda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/stig/.miniconda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
