@@ -1,6 +1,6 @@
 {pkgs, lib, ...}: {
   boot = {
-    # kernelPackages = pkgs.linuxPackages_latest; # don't set it here!
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest; # don't set it here!
     # supportedFilesystems = lib.mkForce [ "ext4" "vfat" "ntfs" "btrfs" ];
     # supportedFilesystems.zfs = lib.mkForce false;
     kernelParams = [ "fsck.mode=skip" "quiet" "loglevel=3"];
