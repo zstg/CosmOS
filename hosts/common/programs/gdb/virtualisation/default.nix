@@ -1,7 +1,7 @@
 {pkgs,home-manager, ...}: {
   imports = [ 
 	# ./docker
-	#./podman
+	# ./podman
 	# ./libvirtd
   ];
   home-manager.users.stig = {

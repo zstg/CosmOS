@@ -16,8 +16,6 @@
   };
 
   imports = [
-    # Do not import homeManagerModule as nixosModules.
-    # ./disko.nix
     # ./programs
     # ./services
   ];
