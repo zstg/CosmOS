@@ -36,7 +36,6 @@ jobs:
           nix build .#${{ matrix.flavor }}
           cp result/iso/*.iso ${{ matrix.flavor }}.iso  # mv doesn't work because the file is owned by the `nixbld` user
           chmod +w ${{ matrix.flavor }}.iso  # Ensure writable for upload
-          rm -rf result/
 
       - name: Create Release (if first flavor)
         if: matrix.flavor == 'hyprland'
