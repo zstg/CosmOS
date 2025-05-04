@@ -1,19 +1,11 @@
 {pkgs, lib, ...}: {
   boot = {
-    # kernelPackages = pkgs.linuxPackages_latest;
+    # kernelPackages = pkgs.linuxPackages_latest; # don't set it here!
     # supportedFilesystems = lib.mkForce [ "ext4" "vfat" "ntfs" "btrfs" ];
     # supportedFilesystems.zfs = lib.mkForce false;
     kernelParams = [ "fsck.mode=skip" "quiet" "loglevel=3"];
     # kernelModules = [ "uinput" ];
-    initrd = {
-	    checkJournalingFS = false;
-	    /*
-	    services.udev.rules.extraRules = ''
-  		  SUBSYSTEM=="input", GROUP="uinput"
-  		  KERNEL=="uinput", GROUP="uinput"
-	    '';
-	    */
-    };
+    # initrd.checkJournalingFS = false; # DISABLE THIS WHILE BUILDING THE ISO
     tmp.cleanOnBoot = true;
     loader = {
       systemd-boot.enable = true;
