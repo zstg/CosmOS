@@ -7,7 +7,6 @@
     # ./nix
     # ./git
     # ./ssh
-    # ./lldb
     # ./gdb
     # ./plymouth
   ];

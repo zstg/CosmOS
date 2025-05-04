@@ -7,7 +7,7 @@
   home-manager.users.stig = {
     home.packages = [
       # pkgs.virt-manager
-      pkgs.gnome-boxes
+      # pkgs.gnome-boxes
     ];
   };
 }

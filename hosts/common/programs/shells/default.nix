@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./fish
-    # ./zsh # fish better
+    # ./fish
   ];
 }

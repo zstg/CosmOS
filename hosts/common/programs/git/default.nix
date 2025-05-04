@@ -3,8 +3,8 @@
     enable = true;
     config = {
       credential = {
-        # helper = "store";
-        helper = "store --file ${config.age.secrets.git-credentials.path}"; # from agenix
+        helper = "store";
+        # helper = "store --file ${config.age.secrets.git-credentials.path}"; # from agenix
       };	
       user = {
         email = "o0vckutt@duck.com";
