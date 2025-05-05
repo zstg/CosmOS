@@ -50,14 +50,13 @@
     wget
     git
     htop
-  ];
 
-  environment.systemPackages = with pkgs.gnomeExtensions; [
-    blur-my-shell
-    burn-my-windows
-    dock-from-dash
-    forge
-    logomenu
-    space-bar
+    # Gnome Extensions
+    gnomeExtensions.blur-my-shell
+    gnomeExtensions.burn-my-windows
+    gnomeExtensions.dock-from-dash
+    gnomeExtensions.forge
+    gnomeExtensions.logomenu
+    gnomeExtensions.space-bar
   ];
 }
