@@ -59,5 +59,5 @@
     forge
     logomenu
     space-bar
-  ]
+  ];
 }
