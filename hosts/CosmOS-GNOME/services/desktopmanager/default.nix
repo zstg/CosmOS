@@ -19,8 +19,6 @@
     # Disable tracker (file indexing)
     tracker-miners.enable = false;
     tracker.enable = false;
-    # Disable GNOME Software/packagekit
-    gnome-software.enable = false;
   };
 
   # Sound - minimal PipeWire setup
