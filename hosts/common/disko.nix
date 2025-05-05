@@ -1,15 +1,15 @@
 {
   disko.devices = {
     disk = {
-      sda = {
-        device = "/dev/sda"; # SSD
+      vda = {
+        device = "/dev/vda";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
             boot = {
-              type = "EF00";  # EFI System Partition
-              size = "1023M";  # 1MB to 1024MB (1MB reserved for alignment)
+              type = "EF00";
+              size = "1023M";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -17,29 +17,12 @@
                 mountOptions = [ "umask=0077" ];
               };
             };
-            root = { # should this be nixos instead?
+            root = { 
               size = "100%";
               content = {
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-              };
-            };
-          };
-        };
-      };
-      sdb = {
-        device = "/dev/sdb"; # the HDD
-        type = "disk";
-        content = {
-          type = "gpt";
-          partitions = {
-            home = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/home";
               };
             };
           };
