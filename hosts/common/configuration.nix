@@ -1,6 +1,6 @@
 { pkgs,lib,...}: {
   documentation.man.generateCaches = false;
-  isoImage.squashfsCompression = "zstd -Xcompression-level 22";
+  isoImage.squashfsCompression = "xz -Xdict-size 100% -Xbcj x86";
   nixpkgs.hostPlatform = "x86_64-linux";
   users.mutableUsers = true;
   programs.fish.enable = true;
