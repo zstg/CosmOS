@@ -9,21 +9,18 @@
       '';
     };
     # Disable non-essential X11 services
-    layout = "us";
-    xkbOptions = "terminate:ctrl_alt_bksp";
-    libinput.enable = true;  # Touchpad support
+    xkb.layout = "us";
+    xkb.options = "terminate:ctrl_alt_bksp";
   };
-
+  services.libinput.enable = true;  # Touchpad support
   # Disable GNOME services we don't need
   services.gnome = {
     # Disable tracker (file indexing)
-    tracker-miners.enable = false;
-    tracker.enable = false;
+    localsearch.enable = false;
+    tinysparql.enable = false;
   };
 
-  # Sound - minimal PipeWire setup
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -39,11 +36,11 @@
   hardware.bluetooth.enable = false;
 
   environment.systemPackages = with pkgs; [
-    gnome.gnome-terminal
-    gnome.nautilus
-    gnome.gedit
-    gnome.gnome-tweaks
-    gnome.gnome-shell-extensions
+    gnome-terminal
+    nautilus
+    gedit
+    gnome-tweaks
+    gnome-shell-extensions
     # Utilities
     wget
     git
@@ -54,7 +51,9 @@
     gnomeExtensions.burn-my-windows
     gnomeExtensions.dock-from-dash
     gnomeExtensions.forge
-    gnomeExtensions.logomenu
+    gnomeExtensions.logo-menu
     gnomeExtensions.space-bar
+    gnomeExtensions.user-themes
+    gnomeExtensions.user-themes-x
   ];
 }

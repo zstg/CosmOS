@@ -76,11 +76,12 @@
 		        specialArgs = { inherit inputs; };
             modules = [
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
-              ({ ... }: {
+              ({ lib,... }: {
                 # boot.supportedFilesystems.zfs = lib.mkForce false;
                 environment.systemPackages = [
                   zen-browser.packages.${system}.default
                 ];
+                networking.wireless.enable = lib.mkForce false;
               })
               ./hosts/common
               ./hosts/CosmOS-GNOME
