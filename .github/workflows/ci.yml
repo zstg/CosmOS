@@ -34,23 +34,26 @@ jobs:
       - name: Build ISO
         run: |
           nix build .#${{ matrix.flavor }}
-          cp result/iso/*.iso ${{ matrix.flavor }}.iso  # mv doesn't work because the file is owned by the `nixbld` user
-          chmod +w ${{ matrix.flavor }}.iso  # Ensure writable for upload
+          cp result/iso/*.iso ${{ matrix.flavor }}.iso
+          chmod +w ${{ matrix.flavor }}.iso
 
       - name: Create Release (if first flavor)
         if: matrix.flavor == 'hyprland'
+        id: create_release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.BUILD_DATE }}
           name: "Nightly ${{ env.BUILD_DATE }}"
           body: Automated ISO release.
           prerelease: true
+          draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload ISO
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: v${{ env.BUILD_DATE }}
           files: ${{ matrix.flavor }}.iso
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
