@@ -8,8 +8,21 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  BUILD_DATE: ${{ github.run_id }}-${{ github.run_attempt }}
+
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      build_date: ${{ steps.set_date.outputs.build_date }}
+    steps:
+      - name: Set build timestamp
+        id: set_date
+        run: echo "build_date=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
+
   build:
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,9 +41,6 @@ jobs:
       - name: Update repo
         run: nix flake update
 
-      - name: Set build timestamp
-        run: echo "BUILD_DATE=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
-
       - name: Build ISO
         run: |
           nix build .#${{ matrix.flavor }}
@@ -40,11 +50,9 @@ jobs:
       - name: Upload ISO
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ env.BUILD_DATE }}
-          name: "CosmOS ${{ env.BUILD_DATE }}"
+          tag_name: v${{ needs.prepare.outputs.build_date }}
+          name: "CosmOS ${{ needs.prepare.outputs.build_date }}"
           body: Automated ISO release.
           files: ${{ matrix.flavor }}.iso
-          # prerelease: true
-          # draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
