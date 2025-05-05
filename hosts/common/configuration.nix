@@ -1,6 +1,7 @@
 { pkgs,lib,...}: {
   documentation.man.generateCaches = false;
-  isoImage.squashfsCompression = "xz -Xpreset 9 -Xdict-size 100% -Xbcj x86";
+  # "xz -Xbcj x86" and "xz -Xpreset 9 -Xbcj x86" don't work
+  isoImage.squashfsCompression = "xz -Xbcj x86 -Xdict-size 100%";
   nixpkgs.hostPlatform = "x86_64-linux";
   users.mutableUsers = true;
   programs.fish.enable = true;
