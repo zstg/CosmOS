@@ -8,8 +8,11 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  BUILD_DATE: ${{ github.run_id }}-${{ github.run_attempt }}
+
 jobs:
-  setup:
+  prepare:
     runs-on: ubuntu-latest
     outputs:
       build_date: ${{ steps.set_date.outputs.build_date }}
@@ -18,67 +21,38 @@ jobs:
         id: set_date
         run: echo "build_date=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install Nix with daemon
-        uses: cachix/install-nix-action@v26
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-          extra_nix_config: |
-            builders-use-substitutes = true
-            keep-outputs = true
-            keep-derivations = true
-
-      - name: Update flake
-        run: nix flake update
-
-      - name: Cache Nix store
-        uses: actions/cache@v3
-        with:
-          path: |
-            /nix/store
-            /etc/nix
-          key: nix-${{ hashFiles('flake.lock') }}
-
   build:
-    needs: setup
+    needs: prepare
     runs-on: ubuntu-latest
     strategy:
       matrix:
         flavor: [CosmOS-Hyprland, CosmOS-GNOME]
+    permissions:
+      contents: write
     steps:
-      - name: Reuse checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Restore Nix environment
-        uses: actions/cache@v3
+      - name: Install Nix
+        uses: cachix/install-nix-action@v26
         with:
-          path: |
-            /nix/store
-            /etc/nix
-          key: nix-${{ hashFiles('flake.lock') }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - name: Update repo
+        run: nix flake update
 
       - name: Build ISO
         run: |
           nix build .#${{ matrix.flavor }}
           cp result/iso/*.iso ${{ matrix.flavor }}.iso
+          chmod +w ${{ matrix.flavor }}.iso
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ./isos
-
-      - name: Create release
+      - name: Upload ISO
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ needs.setup.outputs.build_date }}
-          files: |
-            isos/CosmOS-Hyprland.iso
-            isos/CosmOS-GNOME.iso
+          tag_name: v${{ needs.prepare.outputs.build_date }}
+          name: "CosmOS ${{ needs.prepare.outputs.build_date }}"
+          body: Automated ISO release.
+          files: ${{ matrix.flavor }}.iso
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
