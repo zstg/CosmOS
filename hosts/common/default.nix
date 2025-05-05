@@ -6,10 +6,10 @@
     ./configuration.nix
     ./home.nix
     ./gtk.nix
-    ./fonts.nix
-    ./misc.nix
+    # ./fonts.nix
+    # ./misc.nix
     # ./locale.nix # BROKEN
-    ./systemd.nix
+    # ./systemd.nix
     ./stylix.nix
   ];
 }

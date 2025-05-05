@@ -3,13 +3,13 @@
     ../../common
     ../home.nix
     ./nm-applet.nix
-    ./dconf.nix
-    ./light.nix
+    # ./dconf.nix
+    # ./light.nix
     ./mako
-    ./btop
-    ./cava
-    ./ranger
-    ./zellij
+    # ./btop
+    # ./cava
+    # ./ranger
+    # ./zellij
   ];
   # systemd.user.startServices = "sd-switch";
 }
