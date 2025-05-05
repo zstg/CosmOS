@@ -34,11 +34,11 @@
       {
         packages.${system} = {
           default = self.nixosConfigurations.hyprland.config.system.build.isoImage;
-          gnome = self.nixosConfigurations.gnome.config.system.build.isoImage;
-          hyprland = self.nixosConfigurations.hyprland.config.system.build.isoImage;
+          CosmOS-GNOME = self.nixosConfigurations.CosmOS-GNOME.config.system.build.isoImage;
+          CosmOS-Hyprland = self.nixosConfigurations.CosmOS-Hyprland.config.system.build.isoImage;
         };
         nixosConfigurations = {
-          hyprland = nixpkgs.lib.nixosSystem {
+          CosmOS-Hyprland = nixpkgs.lib.nixosSystem {
 		        specialArgs = { inherit inputs; };
             modules = [
               ({ pkgs, ... }: {
@@ -71,7 +71,7 @@
 
 
 
-          gnome = nixpkgs.lib.nixosSystem {
+          CosmOS-GNOME = nixpkgs.lib.nixosSystem {
 		        specialArgs = { inherit inputs; };
             modules = [
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
