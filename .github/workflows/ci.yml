@@ -20,16 +20,7 @@ jobs:
       - name: Set build timestamp
         id: set_date
         run: echo "build_date=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
-
-  build:
-    needs: prepare
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        flavor: [CosmOS-Hyprland, CosmOS-GNOME]
-    permissions:
-      contents: write
-    steps:
+      
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -40,6 +31,18 @@ jobs:
 
       - name: Update repo
         run: nix flake update
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flavor: [CosmOS-Hyprland, CosmOS-GNOME]
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository (from prepare job)
+        uses: actions/checkout@v4
 
       - name: Build ISO
         run: |
