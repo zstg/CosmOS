@@ -41,14 +41,15 @@
           CosmOS-Hyprland = nixpkgs.lib.nixosSystem {
 		        specialArgs = { inherit inputs; };
             modules = [
-              ({ pkgs, ... }: {
-                environment.systemPackages = with pkgs; [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
+              ({ ... }: {
+                environment.systemPackages =  [
                   zen-browser.packages.${system}.default
                 ];
               })
               ./hosts/common
+              ./hosts/CosmOS-Hyprland
               stylix.nixosModules.stylix
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
               home-manager.nixosModules.home-manager {
                 home-manager = {
                   backupFileExtension = "/tmp/${toString self.lastModified}.bak";
@@ -75,13 +76,14 @@
 		        specialArgs = { inherit inputs; };
             modules = [
               "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
-              ({ pkgs,lib, ... }: {
+              ({ ... }: {
                 # boot.supportedFilesystems.zfs = lib.mkForce false;
-                environment.systemPackages = with pkgs; [
+                environment.systemPackages = [
                   zen-browser.packages.${system}.default
                 ];
               })
               ./hosts/common
+              ./hosts/CosmOS-GNOME
               stylix.nixosModules.stylix
               home-manager.nixosModules.home-manager {
                 home-manager = {
