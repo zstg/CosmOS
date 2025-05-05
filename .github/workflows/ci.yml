@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - working
   workflow_dispatch:
 
 env:
