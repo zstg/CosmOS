@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        flavor: [hyprland, gnome]
+        flavor: [CosmOS-Hyprland, CosmOS-GNOME]
     permissions:
       contents: write
     steps:
@@ -37,23 +37,14 @@ jobs:
           cp result/iso/*.iso ${{ matrix.flavor }}.iso
           chmod +w ${{ matrix.flavor }}.iso
 
-      - name: Create Release (if first flavor)
-        if: matrix.flavor == 'hyprland'
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ env.BUILD_DATE }}
-          name: "Nightly ${{ env.BUILD_DATE }}"
-          body: Automated ISO release.
-          prerelease: true
-          draft: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload ISO
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ env.BUILD_DATE }}
+          name: "CosmOS ${{ env.BUILD_DATE }}"
+          body: Automated ISO release.
           files: ${{ matrix.flavor }}.iso
+          # prerelease: true
+          # draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
