@@ -1,3 +1,3 @@
-{ pkgs,... }: {
-  home-manager.users.stig.home.packages = with pkgs; [ ];
+{ config, pkgs, ... }: {
+  home.packages = with pkgs; [ ];
 }

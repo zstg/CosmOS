@@ -1,9 +1,11 @@
-{ pkgs, username, inputs,... }: 
+{ pkgs,... }: 
 let 
   wallpaper = ./services/desktopmanager/StratOS-Tokyonight-vectorized-caption.png;
 in
 {
-  inputs.home-manager.users.${username}.dconf.settings = {
+  home-manager.users.stig.home.packages = with pkgs; [ ];
+
+  dconf.settings = {
     "org/gnome/shell" = {
       enabled-extensions = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"

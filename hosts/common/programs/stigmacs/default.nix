@@ -1,4 +1,4 @@
-{ pkgs, lib, username, ...}:
+{ pkgs, lib, ...}:
 let
   stigmacs = import ../../programs/stigmacs/stigmacs-pkg.nix {pkgs = pkgs;}; 
 in
@@ -10,7 +10,7 @@ in
       defaultEditor = true;
   };
 
-  home-manager.users.${username} = {
+  home-manager.users.stig = {
  /*
     home.file.".config/emacs" = {
         recursive = true;

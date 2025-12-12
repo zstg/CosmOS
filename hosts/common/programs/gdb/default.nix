@@ -1,5 +1,5 @@
-{pkgs, inputs, username, ...}: {
-  home-manager.users.${username}.home = {
+{pkgs, ...}: {
+  home-manager.users.stig.home = {
     packages = with pkgs; [ gdb gcc clang-tools ];
     file.".gdbinit" = {
       source = ./.gdbinit;

@@ -1,9 +1,8 @@
-{ pkgs, config, inputs, ... }: 
+{ pkgs, config, ... }: 
 let
   globals = config._module.args.globals;
 in
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
   home-manager.users.${globals.nixos_user} = { pkgs, ...}: {
     home.sessionVariables = {
       # See https://docs.vicinae.com/caveats#platform-specific-caveats

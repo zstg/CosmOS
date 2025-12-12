@@ -1,6 +1,6 @@
 {...}: {
   networking = {
-    # wireless.enable = false; # not compatible with networkmanager.enable
+    wireless.enable = false; # not compatible with networkmanager.enable
     # NOT a good idea to uncomment this /here/ !
     # interfaces.wlp2s0.ipv4.addresses = [{
     #   address = "192.168.0.123";

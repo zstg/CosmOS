@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./globals.nix
     ./programs
     ./services
     ./boot.nix

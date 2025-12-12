@@ -1,23 +1,23 @@
-{pkgs, lib, home-manager, username, ...}: 
+{pkgs,lib,...}: 
 let 
   systemfont = { package = pkgs.nerd-fonts.jetbrains-mono; name = "JetBrainsMono NF"; };
 in
 {
-  home-manager.users.${username} = {
+
+  home-manager.users.stig = {
     stylix.iconTheme = {
       enable = true;
       dark = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
     gtk.enable = true;
-    qt.enable = true;
   };
 
   stylix = {
     enable = true;
   	autoEnable = true;
     homeManagerIntegration.followSystem = true;
-  	base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  	base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
     polarity = "dark";
     targets = {
 /*
@@ -26,8 +26,6 @@ in
         platform = "qtct";
       };
 */
-      font-packages.enable = true;
-      fontconfig.enable = true;
       plymouth.enable = false; # use adi1090x's themes collection
   	  chromium.enable = false;
   	  console.enable = false;
@@ -35,6 +33,7 @@ in
       gtk = {
         enable = true;
         # icon theme is set in gtk.nix
+        # flatpakSupport.enable = true;
       };
       
 /*      

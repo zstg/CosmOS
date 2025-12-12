@@ -1,7 +1,7 @@
-{lib, username,...}: {
+{lib,...}: {
   services.displayManager.autoLogin = {
     enable = true;
-    user = username;
+    user = "stig";
   };
   services.xserver = {
     # enable = true;

@@ -1,5 +1,5 @@
-{pkgs, lib, username, ...}: {
-  home-manager.users.${username}.home = {
+{pkgs, lib,...}: {
+  home-manager.users.stig.home = {
     packages = [ pkgs.wezterm ];
     file.".config/wezterm" = {
       recursive = true;

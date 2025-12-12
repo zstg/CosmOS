@@ -1,10 +1,10 @@
-{pkgs,home-manager, username, ...}: {
+{pkgs,home-manager, ...}: {
   imports = [ 
 	# ./docker
 	# ./podman
 	# ./libvirtd
   ];
-  home-manager.users.${username} = {
+  home-manager.users.stig = {
     home.packages = [
       # pkgs.virt-manager
       # pkgs.gnome-boxes

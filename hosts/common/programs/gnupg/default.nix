@@ -1,5 +1,5 @@
-{ pkgs, username, ... }: {
-  home-manager.users.${username} = {
+{ config, pkgs, home-manager,... }: {
+  home-manager.users.stig = {
     programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;

@@ -1,5 +1,5 @@
-{home-manager,pkgs, lib, username,...}: {
-  home-manager.users.${username}.home = {
+{home-manager,pkgs, lib,...}: {
+  home-manager.users.stig.home = {
     packages = with pkgs; [ lldb clang clang-tools ];
     file.".lldbinit" = {
       source = ./.lldbinit;

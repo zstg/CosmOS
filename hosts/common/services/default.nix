@@ -3,13 +3,12 @@
   imports = [
     ./audio
     ./dbus
-    ./envfs
-    ./gpm
+    # ./logind
     ./libinput
-    ./logind
-    ./networking
+    ./envfs
     ./openssh
-    ./security
     ./xdg
+    ./security
+    ./networking
   ];
 }

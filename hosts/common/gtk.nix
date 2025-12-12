@@ -1,5 +1,5 @@
-{username, home-manager, ...}: {
-  home-manager.users.${username} = {
+{pkgs,lib,...}: {
+  home-manager.users.stig = {
     gtk = {
       enable = true;
     };

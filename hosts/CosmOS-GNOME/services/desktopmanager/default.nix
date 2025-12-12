@@ -1,11 +1,11 @@
 { pkgs, lib, ... }: {
   services.xserver = {
     enable = true;
+    desktopManager.gnome.enable = true;
     xkb.layout = "us";
     xkb.options = "terminate:ctrl_alt_bksp";
   };
 
-  services.desktopManager.gnome.enable = true;
   services.libinput.enable = true;
 
   environment.gnome.excludePackages = with pkgs; [

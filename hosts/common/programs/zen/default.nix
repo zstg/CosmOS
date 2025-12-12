@@ -1,5 +1,5 @@
-{lib, username,...}: {
-  home-manager.users.${username}.home.activation.zenfulZen = lib.mkAfter ''
+{lib, ...}: {
+  home-manager.users.stig.home.activation.zenfulZen = lib.mkAfter ''
     if [ ! -d "$HOME/.zen" ]; then
       timeout 5 zen --headless
     fi
