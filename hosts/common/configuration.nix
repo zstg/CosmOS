@@ -14,7 +14,8 @@
   users.users.nixos = {
     shell = pkgs.fish;
     isNormalUser = true;
-    initialPassword = "hello";
+    # initialPassword = lib.mkForce "hello";
+    initialHashedPassword = lib.mkForce "$6$3CiAZ6Ox6QfzjdTz$PtucnDZaOa2tYZ8ncAoHHHOSWUoqdvXnM2P2zyk0TpaUTw57HXkH.B5kuWUtlwEn5wj6jZ5xUyYzQ.bjdQFKv.";
     description = "NOT the same as the live nixos user";
     extraGroups = ["networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "docker"];
   };

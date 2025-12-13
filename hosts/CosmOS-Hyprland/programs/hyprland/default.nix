@@ -5,6 +5,7 @@
   };
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
+
   home-manager.users.nixos.home = {
     packages = with pkgs; [ hyprpaper hyprcursor ];
     file = {

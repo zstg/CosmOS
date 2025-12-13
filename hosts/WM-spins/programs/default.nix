@@ -5,6 +5,7 @@
     ./dconf.nix
     ./light.nix
     ./mako
+    ./eww
     ./btop
     ./cava
     ./ranger
