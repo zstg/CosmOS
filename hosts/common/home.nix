@@ -1,5 +1,5 @@
 {pkgs,...}: {
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
     home.packages = with pkgs; [ bat eza ripgrep ];
   };
 }

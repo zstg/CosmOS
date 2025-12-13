@@ -4,7 +4,7 @@ let
 in
 {
 
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
     stylix.iconTheme = {
       enable = true;
       dark = "Papirus-Dark";

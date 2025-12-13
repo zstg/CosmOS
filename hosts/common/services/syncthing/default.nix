@@ -1,5 +1,5 @@
 {...}: {
-  home-manager.users.stig.services = {
+  home-manager.users.nixos.services = {
     syncthing = {
       enable = true;
       # tray = true; # this option exists only for the home-manager version

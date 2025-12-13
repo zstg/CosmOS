@@ -4,7 +4,7 @@
 	# ./podman
 	# ./libvirtd
   ];
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
     home.packages = [
       # pkgs.virt-manager
       # pkgs.gnome-boxes

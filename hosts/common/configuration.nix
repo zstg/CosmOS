@@ -11,11 +11,11 @@
 
   users.mutableUsers = true;
   programs.fish.enable = true;
-  users.users.stig = {
+  users.users.nixos = {
     shell = pkgs.fish;
     isNormalUser = true;
     initialPassword = "hello";
-    description = "Stig";
+    description = "NOT the same as the live nixos user";
     extraGroups = ["networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "docker"];
   };
 

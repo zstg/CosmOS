@@ -10,7 +10,7 @@ in
       defaultEditor = true;
   };
 
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
  /*
     home.file.".config/emacs" = {
         recursive = true;

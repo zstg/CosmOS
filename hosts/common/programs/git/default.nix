@@ -6,10 +6,12 @@
         helper = "store";
         # helper = "store --file ${config.age.secrets.git-credentials.path}"; # from agenix
       };	
+      /*
       user = {
         email = "o0vckutt@duck.com";
         name = "zstg";
       };
+      */
       core = {
         pager = "delta";	
       };
@@ -45,9 +47,6 @@
         gpgsign = true;	
       };
       */
-      safe = {
-        directory = "/etc/calamares";	
-      };
       filter.lfs = {
         clean = "git-lfs clean -- %f";
         smudge = "git-lfs smudge -- %f";

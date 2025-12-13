@@ -1,5 +1,5 @@
 {pkgs, lib,...}: {
-  home-manager.users.stig.home = {
+  home-manager.users.nixos.home = {
     packages = [ pkgs.wezterm ];
     file.".config/wezterm" = {
       recursive = true;

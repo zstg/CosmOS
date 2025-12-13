@@ -109,7 +109,7 @@
               vicinae.homeManagerModules.default
               # stratos-fish.homeManagerModules.default
             ];
-            home-manager.users.stig = {
+            home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-Hyprland/home.nix ];
               # services.stratos-fish.enable = true;
               home.stateVersion = "25.11";
@@ -131,7 +131,7 @@
               vicinae.homeManagerModules.default
               # stratos-fish.homeManagerModules.default
             ];
-            home-manager.users.stig = {
+            home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-GNOME/home.nix ];
               # services.stratos-fish.enable = true;
               home.stateVersion = "25.11";

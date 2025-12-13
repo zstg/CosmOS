@@ -1,5 +1,5 @@
 {pkgs,lib,...}: {
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
     gtk = {
       enable = true;
     };

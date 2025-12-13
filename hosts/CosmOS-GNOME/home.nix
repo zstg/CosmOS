@@ -3,7 +3,7 @@ let
   wallpaper = ./services/desktopmanager/StratOS-Tokyonight-vectorized-caption.png;
 in
 {
-  home-manager.users.stig.home.packages = with pkgs; [ ];
+  home-manager.users.nixos.home.packages = with pkgs; [ ];
 
   dconf.settings = {
     "org/gnome/shell" = {

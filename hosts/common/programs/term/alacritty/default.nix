@@ -1,5 +1,5 @@
 {pkgs, lib,...}: {
-  home-manager.users.stig.home = {
+  home-manager.users.nixos.home = {
     packages = [ pkgs.alacritty ];
     file.".config/alacritty" = {
       recursive = true;

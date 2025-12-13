@@ -1,6 +1,6 @@
 {pkgs, lib,...}: {
   environment.systemPackages = [ pkgs.kitty ];
-  home-manager.users.stig.home = {
+  home-manager.users.nixos.home = {
     # packages = [ pkgs.kitty ];
     file.".config/kitty" = {
       recursive = true;

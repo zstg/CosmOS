@@ -3,6 +3,7 @@
     ./displaymanager
     ./desktopmanager
     ./power-profiles-daemon
+    ./udiskie
   ];
-  networking.hostName = "Krypton";
+  networking.hostName = "CosmOS";
 }

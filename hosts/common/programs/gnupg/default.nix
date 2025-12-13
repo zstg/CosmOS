@@ -1,5 +1,5 @@
 { config, pkgs, home-manager,... }: {
-  home-manager.users.stig = {
+  home-manager.users.nixos = {
     programs.gpg.enable = true;
     services.gpg-agent = {
       enable = true;
