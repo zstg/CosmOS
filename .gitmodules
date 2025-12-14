@@ -7,3 +7,12 @@
 [submodule "hosts/common/programs/term/kitty/kitty_config"]
 	path = hosts/common/programs/term/kitty/kitty_config
 	url = https://github.com/StratOS-Linux/stratos-kitty-config
+[submodule "hosts/WM-spins/programs/swaync/swaync_config"]
+	path = hosts/WM-spins/programs/swaync/swaync_config
+	url = https://github.com/StratOS-Linux/stratos-swaync-config
+[submodule "hosts/WM-spins/programs/waybar/waybar_config"]
+	path = hosts/WM-spins/programs/waybar/waybar_config
+	url = https://github.com/StratOS-Linux/stratos-waybar-config
+[submodule "hosts/common/programs/starship/starship_config"]
+	path = hosts/common/programs/starship/starship_config
+	url = https://github.com/StratOS-Linux/stratos-starship-config
