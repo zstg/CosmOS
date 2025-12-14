@@ -21,6 +21,7 @@
   };
 
   imports = [
+    ./disko-config.nix
     ./programs
     ./services
   ];
