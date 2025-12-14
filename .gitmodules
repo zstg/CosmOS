@@ -1,0 +1,3 @@
+[submodule "hosts/common/programs/shells/fish/fish_config"]
+	path = hosts/common/programs/shells/fish/fish_config
+	url = https://github.com/zstg/stratos-fish-config
