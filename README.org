@@ -7,17 +7,20 @@ nix build .#CosmOS-GNOME
 nix build .#COsmOS-Hyprland
 #+END_SRC
 
-* To install the VM image from an ISO
+* To install in a VM
+Installation ISOs will *not* be provided for now. The snippet below sets
 #+BEGIN_SRC fish
 git clone https://github.com/zstg/CosmOS ~/.nixos
-sudo nix run \
+cd ~/.nixos/
+#+END_SRC
+
+Note that this *formats* your devices based on the schema provided in flake.nix. Failing to adjust the disko configuration accordingly may result in data loss, or worse, an unbootable system.
+To perform the partitioning and install:
+#+BEGIN_SRC fish
+sudo nix \
     --extra-experimental-features 'flakes nix-command' \
-    github:nix-community/disko/latest \
-    -- --mode destroy,format,mount \
-    ~/.nixos/hosts/common/disko.nix \
-    --yes-wipe-all-disks 
-sudo nixos-install \
-     # --root /mnt
-     --flake ~/.nixos/#CosmOS-GNOME
-     # Replace with CosmOS-Hyprland accordingly.
+    run github:nix-community/disko/latest#disko-install \
+    -- --write-efi-boot-entries \
+    --flake .?submodules=1#CosmOS-Hyprland \ # or any other spin
+    --disk main /dev/vda 
 #+END_SRC
