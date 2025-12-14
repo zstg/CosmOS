@@ -20,11 +20,14 @@
     extraGroups = ["networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "docker"];
   };
 
-  imports = [
-    # ./disko-config.nix
-    ./programs
-    ./services
-  ];
+  imports = 
+    lib.optional (builtins.pathExists ./hardware-configuration.nix) 
+      ./hardware-configuration.nix
+    ++ [
+      # ./disko-config.nix
+      ./programs
+      ./services
+    ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
