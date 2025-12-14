@@ -20,9 +20,8 @@
     extraGroups = ["networkmanager" "wheel" "input" "video" "libvirtd" "dialout" "docker"];
   };
 
-  imports = 
-    lib.optional (builtins.pathExists ./hardware-configuration.nix) 
-      ./hardware-configuration.nix
+  imports =
+    lib.optional (builtins.pathExists ./hardware-configuration.nix) ./hardware-configuration.nix
     ++ [
       # ./disko-config.nix
       ./programs

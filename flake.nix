@@ -21,9 +21,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     vicinae.url = "github:vicinaehq/vicinae";
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, vicinae, zen-browser, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, disko, stylix, vicinae, zen-browser, ... } @ inputs:
     let
       system = "x86_64-linux";
       
@@ -31,6 +35,42 @@
       commonIsoBase = edition: modules: nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs system; };
         modules = [
+          disko.nixosModules.disko 
+          {
+            disko.devices = {
+              disk = {
+                main = {
+                  device = "/dev/disk/by-id/some-id"; # When using disko-install, we will overwrite this value from the commandline
+                  type = "disk";
+                  content = {
+                    type = "gpt";
+                    partitions = {
+                      ESP = {
+                        type = "EF00";
+                        size = "1G";
+                        priority = 1; # set 1 esp on
+                        content = {
+                          type = "filesystem";
+                          format = "vfat";
+                          mountpoint = "/boot";
+                          mountOptions = [ "umask=0777" ];
+                        };
+                      };
+                      root = {
+                        size = "100%";
+                        content = {
+                          type = "filesystem";
+                          format = "ext4";
+                          mountpoint = "/";
+                        };
+                      };
+                    };
+                  };
+                };
+                # other_disk = {};
+              };
+            };
+          }
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
           ({ lib, ... }: {
             isoImage.edition = edition;
