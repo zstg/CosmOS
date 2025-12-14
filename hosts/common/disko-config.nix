@@ -1,6 +1,6 @@
 # Source: https://github.com/nix-community/disko-templates/blob/main/single-disk-ext4/disko-config.nix
-# NOTE flakes must be enabled: https://gist.githubusercontent.com/zstg/34b670213ceec874904cadd13194c626/raw/ce5eb3b27e5d8304aaab01eb0bf27433b18dbe9c/flakes_nix.sh
 # USE: sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /path/to/disko-config.nix
+# NOTE it's a good idea to enable flakes: https://gist.githubusercontent.com/zstg/34b670213ceec874904cadd13194c626/raw/ce5eb3b27e5d8304aaab01eb0bf27433b18dbe9c/flakes_nix.sh
 # USAGE in your configuration.nix.
 # Update devices to match your hardware.
 # {
@@ -11,7 +11,7 @@
   disko.devices = {
     disk = {
       main = {
-        device = "/dev/sda";
+        device = "/dev/vda";
         type = "disk";
         content = {
           type = "gpt";
