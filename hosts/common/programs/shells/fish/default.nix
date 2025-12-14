@@ -10,7 +10,7 @@
       root = ./fish_config;
       
       # only include the .config/fish subtree
-      fileset = ./fish_config/.config/fish;
+      fileset = lib.fileset.maybeMissing ./fish_config/.config/fish;
     };
   };
 }
