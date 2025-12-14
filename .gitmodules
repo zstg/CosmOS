@@ -1,3 +1,9 @@
 [submodule "hosts/common/programs/shells/fish/fish_config"]
 	path = hosts/common/programs/shells/fish/fish_config
 	url = https://github.com/zstg/stratos-fish-config
+[submodule "hosts/CosmOS-Hyprland/programs/hyprland/hyprland_config"]
+	path = hosts/CosmOS-Hyprland/programs/hyprland/hyprland_config
+	url = https://github.com/StratOS-Linux/stratos-hyprland-config
+[submodule "hosts/common/programs/term/kitty/kitty_config"]
+	path = hosts/common/programs/term/kitty/kitty_config
+	url = https://github.com/StratOS-Linux/stratos-kitty-config

@@ -6,7 +6,7 @@
   home-manager.users.nixos.home.file.".config/fish" = {
     recursive = true;
     source = lib.fileset.toSource {
-	  # folder that contains .config
+      # folder that contains .config
       root = ./fish_config;
       
       # only include the .config/fish subtree
