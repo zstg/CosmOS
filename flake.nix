@@ -78,33 +78,6 @@
             boot.supportedFilesystems.zfs = lib.mkForce false;
             environment.systemPackages = [ zen-browser.packages.${system}.default ];
 
-            networking.networkmanager.enable = lib.mkForce true;
-            systemd.services.live-nm-fix = {
-              description = "Fix NetworkManager on live ISO (once)";
-              wantedBy = [ "multi-user.target" ];
-              before   = [ "multi-user.target" ];
-              unitConfig = {
-                # Only on live ISO
-                ConditionKernelCommandLine = "live";
-                # Not an installed system
-                ConditionPathExists = [
-                  "!/run/booted-system"
-                  "!/run/live-nm-fixed"
-                  "/run/current-system/iso-image"
-                ];
-              };
-              serviceConfig = {
-                Type = "simple";
-                User = "root";
-                Group = "root";
-                ExecStart = "${pkgs.networkmanager}/bin/NetworkManager --no-daemon";
-                ExecStartPost = ''
-                    ${pkgs.coreutils}/bin/touch /run/live-nm-fixed
-                '';
-              };
-            };
-
-
             isoImage = {
               edition = edition;
               isoName = "CosmOS${if edition != "" then "-${edition}" else ""}-#{self.lastModified}";

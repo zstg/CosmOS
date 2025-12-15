@@ -1,4 +1,22 @@
 {...}: {
+
+  systemd.services.NetworkManager = {
+    wantedBy = [ "multi-user.target" ];
+    # after = [ "dbus.socket" "systemd-udev-settle.service" ];
+    # wants = [ "dbus.socket" ];
+    unitConfig = {
+      ConditionPathExists= [];
+      # ConditionKernelCommandLine = "live";
+    };
+    # Disable live ISO sandboxing for NetworkManager to allow it to start properly
+    serviceConfig = {
+      ProtectSystem = "no";
+      ProtectHome = false;
+      PrivateTmp = false;
+      PrivateDevices = false;
+      NoNewPrivileges = false;
+    };
+  };
   networking = {
     wireless.enable = false; # not compatible with networkmanager.enable
     # NOT a good idea to uncomment this /here/ !
