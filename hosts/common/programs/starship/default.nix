@@ -2,7 +2,7 @@
   programs.starship = {
     enable = true;
   };
-  # inputs.home-manager.users.nixos.home.file.".config/starship.toml".text = builtins.readFile ./starship_config/.config/starship.toml;
+  # home-manager.users.nixos.home.file.".config/starship.toml".text = builtins.readFile ./starship_config/.config/starship.toml;
   home-manager.users.nixos = {
     programs.starship = {
       enable = true;

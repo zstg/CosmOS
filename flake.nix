@@ -2,6 +2,7 @@
   description = "Stig's NixOS ISOs";
 
   inputs = {
+    self.submodules = true; # since this flake uses submodules. This is purely optional, but it means one does not have to specify `?submodules=1` when checking this flake or building the ISO.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -27,7 +28,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, disko, stylix, vicinae, zen-browser, ... } @ inputs:
+  outputs = { self, nixpkgs, home-manager, disko, stylix, vicinae, zen-browser, sddm-astronaut-theme, ... } @ inputs:
     let
       system = "x86_64-linux";
       
@@ -72,11 +73,44 @@
             };
           }
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel-no-zfs.nix"
-          ({ lib, ... }: {
-            isoImage.edition = edition;
+          ./hosts/common
+          ({ pkgs, lib, ... }: {
             boot.supportedFilesystems.zfs = lib.mkForce false;
             environment.systemPackages = [ zen-browser.packages.${system}.default ];
+
             networking.networkmanager.enable = lib.mkForce true;
+            systemd.services.live-nm-fix = {
+              description = "Fix NetworkManager on live ISO (once)";
+              wantedBy = [ "multi-user.target" ];
+              before   = [ "multi-user.target" ];
+              unitConfig = {
+                # Only on live ISO
+                ConditionKernelCommandLine = "live";
+                # Not an installed system
+                ConditionPathExists = [
+                  "!/run/booted-system"
+                  "!/run/live-nm-fixed"
+                  "/run/current-system/iso-image"
+                ];
+              };
+              serviceConfig = {
+                Type = "simple";
+                User = "root";
+                Group = "root";
+                ExecStart = "${pkgs.networkmanager}/bin/NetworkManager --no-daemon";
+                ExecStartPost = ''
+                    ${pkgs.coreutils}/bin/touch /run/live-nm-fixed
+                '';
+              };
+            };
+
+
+            isoImage = {
+              edition = edition;
+              isoName = "CosmOS${if edition != "" then "-${edition}" else ""}-#{self.lastModified}";
+              makeEfiBootable = true;
+              makeUsbBootable = true;
+            };
           })
         ] ++ modules;
       };
@@ -107,17 +141,19 @@
       };
     in {
       packages.${system} = {
-        default = self.nixosConfigurations.CosmOS-Hyprland.config.system.build.isoImage;
-        CosmOS-GNOME = self.nixosConfigurations.CosmOS-GNOME.config.system.build.isoImage;
-        CosmOS-Hyprland = self.nixosConfigurations.CosmOS-Hyprland.config.system.build.isoImage;
+        hyprland-iso = self.nixosConfigurations.hyprland-iso.config.system.build.isoImage;
+        gnome-iso = self.nixosConfigurations.gnome-iso.config.system.build.isoImage;
+        default = self.packages.${system}.hyprland-iso;
       };
 
       nixosConfigurations = {
-        CosmOS-Hyprland = commonIsoBase "" [
-          ./hosts/common
+        # TODO create a minimal ISO
+        hyprland-iso = commonIsoBase "hyprland" [
           ./hosts/CosmOS-Hyprland
           stylix.nixosModules.stylix
 
+          # This configures and sets up SDDM with the StratOS astronaut theme. No need to enable SDDM anywhere in the config.
+          sddm-astronaut-theme.nixosModules.sddm-theme # TODO migrate this to WM-spins...?
           # include the module *directly*
           home-manager.nixosModules.home-manager
 
@@ -135,8 +171,7 @@
           }
         ];
 
-        CosmOS-GNOME = commonIsoBase "gnome" [
-          ./hosts/common
+        gnome-iso = commonIsoBase "gnome" [
           ./hosts/CosmOS-GNOME
           stylix.nixosModules.stylix
 
@@ -145,9 +180,6 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              vicinae.homeManagerModules.default
-            ];
             home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-GNOME/home.nix ];
               home.stateVersion = "25.11";
@@ -157,8 +189,8 @@
       };
 
       homeConfigurations = {
-        hyprland = mkStandaloneHome "hyprland" "CosmOS-Hyprland";
-        gnome = mkStandaloneHome "gnome" "CosmOS-GNOME";
+        hyprland-iso = mkStandaloneHome "hyprland" "hyprland-iso";
+        gnome-iso = mkStandaloneHome "gnome" "gnome-iso";
       };
     };
 }

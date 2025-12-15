@@ -1,4 +1,4 @@
-{...}: {
+{pkgs,...}: {
   services.envfs.enable = true;
   environment.variables = {
     NIX_STRIP_DEBUG="1";
@@ -15,4 +15,5 @@
   # };
   systemd.sleep.extraConfig = "HibernateDelaySec=3600"; # "HibernateDelaySec=3600\nOtherOptions\nMoreOptions"
   programs.nix-ld.enable = true;
+  programs.xwayland.package = pkgs.xwayland; # Prevents recompiling XWayland from source
 }
