@@ -6,6 +6,7 @@
     kernelParams = [ "fsck.mode=skip" "quiet" "loglevel=3"];
     # kernelModules = [ "uinput" ];
     # initrd.checkJournalingFS = false; # DISABLE THIS WHILE BUILDING THE ISO
+    initrd.systemd.network.wait-online.enable = false;
     tmp.cleanOnBoot = true;
     loader = {
       systemd-boot.enable = true;
@@ -20,4 +21,5 @@
       magicOrExtension = ''\x7fELF....AI\x02'';
     };
   };
+  systemd.network.wait-online.enable = false;
 }

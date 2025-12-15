@@ -2,15 +2,18 @@
   programs.fish = {
     enable = true;
   };
-  # This symlink to .config/fish is required because NixOS and HM don't offer a way to set the configuration directory.
-  home-manager.users.nixos.home.file.".config/fish" = {
-    recursive = true;
-    source = lib.fileset.toSource {
-      # folder that contains .config
-      root = ./fish_config;
+  home-manager.users.nixos = {
+    home.file = {
+      ".config/fish/aliases".text = builtins.readFile ./fish_config/.config/fish/aliases;
+      ".config/fish/.profile".text = builtins.readFile ./fish_config/.config/fish/.profile;
+      ".config/fish/git.fish".text = builtins.readFile ./fish_config/.config/fish/git.fish;
+      ".config/fish/config.fish".text = builtins.readFile ./fish_config/.config/fish/config.fish;
+
+      ".config/fish/functions" = {
+        source = ./fish_config/.config/fish/functions;
+        recursive = true;
+      };
       
-      # only include the .config/fish subtree
-      fileset = lib.fileset.maybeMissing ./fish_config/.config/fish;
     };
   };
 }
