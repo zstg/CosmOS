@@ -14,6 +14,11 @@
   #   '';
   # };
   systemd.sleep.extraConfig = "HibernateDelaySec=3600"; # "HibernateDelaySec=3600\nOtherOptions\nMoreOptions"
+  systemd.services.systemd-update-done = {
+    enable = false; # this service is not needed on nixos; it only pollutes boot logs
+    wantedBy = [];
+    requiredBy = [];
+  };
   programs.nix-ld.enable = true;
   programs.xwayland.package = pkgs.xwayland; # Prevents recompiling XWayland from source
 }

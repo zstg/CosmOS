@@ -2,7 +2,7 @@
   imports = [
     ./programs
     ./services
-    ./boot.nix
+    ./boot
     ./configuration.nix
     ./home.nix
     ./gtk.nix
