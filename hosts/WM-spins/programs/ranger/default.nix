@@ -1,5 +1,5 @@
-{pkgs, lib, username, ...}: {
-  home-manager.users.${username}.home = {
+{pkgs, lib, ...}: {
+  home-manager.users.nixos.home = {
     packages = [ pkgs.ranger ];
     file.".config/ranger" = {
       recursive = true;

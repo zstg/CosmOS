@@ -16,3 +16,9 @@
 [submodule "hosts/common/programs/starship/starship_config"]
 	path = hosts/common/programs/starship/starship_config
 	url = https://github.com/StratOS-Linux/stratos-starship-config
+[submodule "hosts/WM-spins/programs/eww/eww_config"]
+	path = hosts/WM-spins/programs/eww/eww_config
+	url = https://github.com/stratos-linux/stratos-eww-config
+[submodule "hosts/WM-spins/programs/mako/mako_config"]
+	path = hosts/WM-spins/programs/mako/mako_config
+	url = https://github.com/StratOS-Linux/StratOS-mako-config

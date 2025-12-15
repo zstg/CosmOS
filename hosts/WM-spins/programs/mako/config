@@ -1,0 +1,17 @@
+# -*- conf-unix -*-
+max-history=0
+sort=-time
+background-color=#292f3a
+# layer=top
+# anchor=top-right
+border-color=#5c64f1
+border-radius=8
+border-size=3
+text-color=#abb2bf
+icons=1
+default-timeout=5000
+max-icon-size=256
+height=300
+# width=500
+font=JetBrainsMonoNF 14
+progress-color=over #97c277
