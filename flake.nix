@@ -126,7 +126,7 @@
           stylix.nixosModules.stylix
 
           # This configures and sets up SDDM with the StratOS astronaut theme. No need to enable SDDM anywhere in the config.
-          sddm-astronaut-theme.nixosModules.sddm-theme # TODO migrate this to WM-spins...?
+          sddm-astronaut-theme.nixosModules.default # TODO migrate this to WM-spins...?
           # include the module *directly*
           home-manager.nixosModules.home-manager
 

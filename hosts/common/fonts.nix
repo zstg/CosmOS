@@ -8,7 +8,7 @@
     	# nerd-fonts.symbols-only 
     ];
     fontconfig = {
-      enable = false;
+      enable = true;
       # fixes pixelation
       # antialias = true;
     
