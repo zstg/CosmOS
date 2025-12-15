@@ -1,4 +1,4 @@
-{ config, pkgs, home-manager,... }: {
+{ config, pkgs,... }: {
   home-manager.users.nixos = {
     programs.gpg.enable = true;
     services.gpg-agent = {

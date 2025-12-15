@@ -1,4 +1,4 @@
-{ pkgs, config, lib, home-manager, ... }: {
+{ pkgs, config, lib, ... }: {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
