@@ -125,10 +125,10 @@
                 environment.systemPackages = [
                   inputs.zen-browser.packages.${system}.default
                 ];
-
+                
+                image.fileName = "CosmOS${if edition != "" then "-${edition}" else ""}-${toString self.lastModified}";
                 isoImage = {
                   inherit edition;
-                  isoName         = "CosmOS${if edition != "" then "-${edition}" else ""}-${toString self.lastModified}";
                   makeEfiBootable = true;
                   makeUsbBootable = true;
                 };
