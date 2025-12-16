@@ -25,8 +25,11 @@
     #   prefixLength = 24;
     # }];
     # defaultGateway = "192.168.1.1";
-    # nameservers = [ "8.8.8.8", "4.4.4.4" ];
-     networkmanager.enable = true;
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
+     networkmanager = {
+      enable = true;
+      dhcp = "internal"; # or "dhcpcd";
+     };
      firewall = {
         enable = true;
         allowedTCPPorts = [ 80 443 53317 ]; # 53317 is for LocalSend

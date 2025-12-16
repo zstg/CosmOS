@@ -26,6 +26,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stratos-wallpapers = {
+      url = "github:stratos-linux/stratos-wallpapers";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, disko, stylix, vicinae, zen-browser, sddm-astronaut-theme, ... } @ inputs:
@@ -115,6 +119,7 @@
     in {
       packages.${system} = {
         hyprland-iso = self.nixosConfigurations.hyprland-iso.config.system.build.isoImage;
+        niri-iso = self.nixosConfigurations.niri-iso.config.system.build.isoImage;
         gnome-iso = self.nixosConfigurations.gnome-iso.config.system.build.isoImage;
         default = self.packages.${system}.hyprland-iso;
       };
@@ -144,6 +149,29 @@
           }
         ];
 
+        niri-iso = commonIsoBase "niri" [
+          ./hosts/CosmOS-Niri
+          stylix.nixosModules.stylix
+
+          # This configures and sets up SDDM with the StratOS astronaut theme. No need to enable SDDM anywhere in the config.
+          sddm-astronaut-theme.nixosModules.default # TODO migrate this to WM-spins...?
+          # include the module *directly*
+          home-manager.nixosModules.home-manager
+
+          # then configure Home Manager options
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              vicinae.homeManagerModules.default
+            ];
+            home-manager.users.nixos = {
+              imports = [ ./hosts/CosmOS-Niri/home.nix ];
+              home.stateVersion = "25.11";
+            };
+          }
+        ];
+
         gnome-iso = commonIsoBase "gnome" [
           ./hosts/CosmOS-GNOME
           stylix.nixosModules.stylix
@@ -163,6 +191,7 @@
 
       homeConfigurations = {
         hyprland-iso = mkStandaloneHome "hyprland" "hyprland-iso";
+        niri-iso = mkStandaloneHome "niri" "niri-iso";
         gnome-iso = mkStandaloneHome "gnome" "gnome-iso";
       };
     };

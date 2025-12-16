@@ -29,7 +29,7 @@ in
       plymouth.enable = false; # use adi1090x's themes collection
   	  chromium.enable = false;
   	  console.enable = false;
-      fish.enable = true;
+      fish.enable = false; # messes up the TTY
       gtk = {
         enable = true;
         # icon theme is set in gtk.nix

@@ -22,9 +22,6 @@
 [submodule "hosts/WM-spins/programs/mako/mako_config"]
 	path = hosts/WM-spins/programs/mako/mako_config
 	url = https://github.com/StratOS-Linux/StratOS-mako-config
-[submodule "hosts/CosmOS-Niri/programs/niri_config"]
-	path = hosts/CosmOS-Niri/programs/niri_config
-	url = https://github.com/StratOS-Linux/StratOS-niri-config
 [submodule "hosts/CosmOS-Niri/programs/niri/niri_config"]
 	path = hosts/CosmOS-Niri/programs/niri/niri_config
 	url = https://github.com/StratOS-Linux/StratOS-niri-config
