@@ -1,4 +1,4 @@
-{pkgs, lib, username, ...}: {
+{pkgs, lib, ...}: {
   imports = [ ../common ];
   services.displayManager.cosmic-greeter.enable = false;
   services.desktopManager.cosmic = {
@@ -19,7 +19,7 @@
     kdePackages.xwaylandvideobridge
   ];
 
-  home-manager.users.${username}.home = {
+  home-manager.users.nixos.home = {
     activation.cleanupCosmic = lib.mkBefore ''
       rm -rf ~/.config/cosmic
     '';

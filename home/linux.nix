@@ -1,10 +1,6 @@
-{ pkgs, system, username, config, ...}: {
+{ pkgs, system, config, ...}: {
   imports = [
     ./core.nix
     ./programs
   ];
-  home = {
-    inherit username;
-    homeDirectory = "/home/${username}";
-  };
 }

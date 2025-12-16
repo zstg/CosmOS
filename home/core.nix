@@ -1,5 +1,5 @@
-{username,...}: {
+{version,...}: {
   home = {
-    stateVersion = "25.11";
+    stateVersion = version;
   };
 }

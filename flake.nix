@@ -35,6 +35,7 @@
   outputs = { self, nixpkgs, home-manager, disko, stylix, vicinae, zen-browser, sddm-astronaut-theme, ... } @ inputs:
     let
       system = "x86_64-linux";
+      version = "26.05";
       
       # Common ISO base
       commonIsoBase = edition: modules: nixpkgs.lib.nixosSystem {
@@ -120,7 +121,7 @@
       packages.${system} = {
         hyprland-iso = self.nixosConfigurations.hyprland-iso.config.system.build.isoImage;
         niri-iso = self.nixosConfigurations.niri-iso.config.system.build.isoImage;
-        gnome-iso = self.nixosConfigurations.gnome-iso.config.system.build.isoImage;
+        # gnome-iso = self.nixosConfigurations.gnome-iso.config.system.build.isoImage;
         default = self.packages.${system}.hyprland-iso;
       };
 
@@ -144,7 +145,7 @@
             ];
             home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-Hyprland/home.nix ];
-              home.stateVersion = "25.11";
+              home.stateVersion = version;
             };
           }
         ];
@@ -167,7 +168,7 @@
             ];
             home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-Niri/home.nix ];
-              home.stateVersion = "25.11";
+              home.stateVersion = version;
             };
           }
         ];
@@ -183,7 +184,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.nixos = {
               imports = [ ./hosts/CosmOS-GNOME/home.nix ];
-              home.stateVersion = "25.11";
+              home.stateVersion = version;
             };
           }
         ];
@@ -192,7 +193,7 @@
       homeConfigurations = {
         hyprland-iso = mkStandaloneHome "hyprland" "hyprland-iso";
         niri-iso = mkStandaloneHome "niri" "niri-iso";
-        gnome-iso = mkStandaloneHome "gnome" "gnome-iso";
+        # gnome-iso = mkStandaloneHome "gnome" "gnome-iso";
       };
     };
 }
