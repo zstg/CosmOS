@@ -5,6 +5,11 @@
   };
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    config.common.default = "hyprland";
+  };
   # TODO Replace /usr in the conf files with ${inputs.stratos-wallpapers.packages.${system}.default}/ using sed or some Nix function
   home-manager.users.nixos = {
     programs.hyprlock = {
@@ -13,10 +18,10 @@
     };
     services.polkit-gnome.enable = true;
     wayland.windowManager.hyprland = {
-      enable = true;
-      xwayland.enable = true;
+      # enable = true;
+      # xwayland.enable = true;
       extraConfig = builtins.readFile ./hyprland_config/.config/hypr/hyprland.conf;
-      systemd.enable = lib.mkDefault false;
+      # systemd.enable = lib.mkDefault false;
       package = pkgs.hyprland;
       portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };

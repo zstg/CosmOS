@@ -1,10 +1,15 @@
 { pkgs, config, lib, system, inputs,  ... }: {
   programs.niri = {
     enable = true;
+    useNautilus = true;
   };
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
-
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    config.common.default = "gnome";
+  };
   home-manager.users.nixos = {
     programs.hyprlock = {
       enable = true;
